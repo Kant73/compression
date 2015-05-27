@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	#endif
 	
 	FILE* file;
-	file = fopen(/*nom du fichier*/, "r");
+	//file = fopen(/*nom du fichier*/, "r");
 	
 	
 	if (file == NULL)
