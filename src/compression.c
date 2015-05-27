@@ -40,9 +40,9 @@ void encode(file* E, file* S, type_dico* dic)
 	{									//que le fichier n'est pas ouvert
 		while(!feof(E))					//Tant qu'on atteint pas la fin de fichier
 		{
-			a = fgetc(E);
-			insereQueue(mot_concat, a);
-			if ( (code = chercher_mot(mot_concat)) >= 0)
+			a = fgetc(E);				//On stock dans a le caractère courant
+			insereQueue(mot_concat, a);	//On insère en queue de notre chaine d'octet l'octet courant
+			if ( (code = chercher_mot(mot_concat)) >= 0)	//On stock dans code le code du mot concatener
 			{
 				mot = mot_concat;
 			}
