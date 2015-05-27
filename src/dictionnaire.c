@@ -61,7 +61,6 @@ void afficher(type_dico* dico)
 {
 	if (dico != NULL)
 	{
-
 		int i;
 		for (i = 0; i < 256; i++)
 		{
