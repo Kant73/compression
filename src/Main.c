@@ -14,10 +14,10 @@ int main(int argc, char* argv[])
 		printf("<DEBUG MODE ENABLED>\n");
 	#endif
 	
+	//TEST//
+	///////////////////////////////////////////////////////
 	type_dico* dictionnaire = calloc(1, sizeof(type_dico));
 	initialiser_dico(dictionnaire);
-	
-	
 	
 	type_mot* mot = calloc(1, sizeof(type_mot));
 	mot->lettre = 0;
@@ -28,6 +28,8 @@ int main(int argc, char* argv[])
 	
 	afficher(dictionnaire);
 	
+	liberer_mot(mot);
+	///////////////////////////////////////////////////////
 	
 	FILE* file;
 	//file = fopen(/*nom du fichier*/, "r");

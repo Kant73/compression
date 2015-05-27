@@ -27,12 +27,13 @@ struct type_mot
 void initialiser_dico(type_dico* dico);
 
 //Insere un mot dans le dictionnaire
-void inserer(type_mot* mot, type_dico* dico);
+void inserer_dico(type_mot* mot, type_dico* dico);
 
 //Cherche si un mot existe dans le dictionnaire (@return: 0 si pas dedans / 1 si dedans)
-int chercher(type_mot* mot, type_dico* dico);
+int chercher_dico(type_mot* mot, type_dico* dico);
 
 //Affiche le contenu du dictionnaire
-void afficher(type_dico* dico);
+void afficher_dico(type_dico* dico);
 
-
+//Libérer la mémoire occupée par un mot
+void liberer_mot(type_mot* mot);

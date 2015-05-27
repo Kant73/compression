@@ -13,7 +13,7 @@ void initialiser_dico(type_dico* dico)
 	}
 }
 
-void inserer(type_mot* mot, type_dico* dico)
+void inserer_dico(type_mot* mot, type_dico* dico)
 {
 	static int cpt = 256;
 	
@@ -38,7 +38,7 @@ void inserer(type_mot* mot, type_dico* dico)
 	cpt++;
 }
 
-int chercher(type_mot* mot, type_dico* dico)
+int chercher_dico(type_mot* mot, type_dico* dico)
 {
 	if (dico == NULL || mot == NULL) //Dico ou mot vide
 		return;
@@ -57,7 +57,7 @@ int chercher(type_mot* mot, type_dico* dico)
 	return 1;
 }
 
-void afficher(type_dico* dico)
+void afficher_dico(type_dico* dico)
 {
 	if (dico != NULL)
 	{
@@ -70,10 +70,17 @@ void afficher(type_dico* dico)
 		
 		printf("\n");
 		for (i = 0; i < 256; i++)
-			afficher(dico->branches[i]->suivant);
+			afficher_dico(dico->branches[i]->suivant);
 	}
 }
 
-
-
-
+void liberer_mot(type_mot* mot)
+{
+	type_mot* temp_mot = mot;
+	while (temp_mot != NULL)
+	{
+		mot = mot_temp->suivant;
+		free(mot_temp);
+		mot_temp = *mot;
+	}
+}
