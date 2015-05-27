@@ -7,11 +7,20 @@ FLAG = -DDEBUG
 
 all: prog
 
-prog: main.o
+prog: main.o fonctions.o compression.o decompression.o
 	gcc main.o -o main
 	
-main.o : Main.c
-	gcc -c Main.c -o main.o $(FLAG)
+main.o : Main.c ../include/*.h
+	gcc -c Main.c -o main.o -I ../include $(FLAG)
+	
+fonctions.o: Fonctions.c ../include/*.h
+	gcc -c Fonctions.c -o fonctions.o -I ../include $(FLAG)
+
+compression.o : compression.c ../include/*.h
+	gcc -c compression.c -o compression.o -I ../include $(FLAG)
+
+decompression.o : decompression.c ../include/*.h
+	gcc -c decompression.c -o decompression.o -I ../include $(FLAG)
 	
 #Supprimer les .o
 clean:
