@@ -1,10 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+
 typedef struct type_dico type_dico;
+typedef struct type_code type_code;
+typedef struct type_mot type_mot;
+
 struct type_dico
 {
-	type_dico* branches[256];
+	type_code* branches[256];
 };
 
-typedef struct type_mot type_mot;
+struct type_code
+{
+	int code;
+	type_dico* suivant;
+};
+
 struct type_mot
 {
 	uint8_t lettre;
@@ -12,12 +24,15 @@ struct type_mot
 };
 
 //Initialise le dictionnaire avec les monomes
-void initialiser();
+void initialiser_dico(type_dico* dico);
 
 //Insere un mot dans le dictionnaire
 void inserer(type_mot* mot, type_dico* dico);
 
 //Cherche si un mot existe dans le dictionnaire (@return: 0 si pas dedans / 1 si dedans)
 int chercher(type_mot* mot, type_dico* dico);
+
+//Affiche le contenu du dictionnaire
+void afficher(type_dico* dico);
 
 
