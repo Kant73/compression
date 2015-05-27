@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "../include/dictionnaire.h"
 
@@ -19,7 +20,7 @@ int chercher(type_mot* mot, type_dico* dico)
 	type_mot* temp = mot;
 	while (temp != NULL)
 	{
-		if ((*dico)[temp->lettre] != NULL)
+		if (dico->branches[temp->lettre] != NULL)
 			temp = temp->suivant;
 		else
 			return 0;
