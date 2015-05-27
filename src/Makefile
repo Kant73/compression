@@ -24,9 +24,12 @@ decompression.o : decompression.c ../include/*.h
 	
 #Supprimer les .o
 clean:
-	rm *.o
+	rm -rf *.o
+	rm -rf *~
+	rm -rf ../include/*~
+	rm -rf ../*~
 	
 #Supprimer l'éxécutable
 mrproprer: clean
 	rm main
-	rm *.o
+	
