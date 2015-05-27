@@ -3,13 +3,15 @@
 #NAVARRO Elsa
 #POPEK Florian
 
+FLAG = -DDEBUG
+
 all: prog
 
 prog: main.o
 	gcc main.o -o main
 	
 main.o : Main.c
-	gcc -c Main.c -o main.o
+	gcc -c Main.c -o main.o $(FLAG)
 	
 #Supprimer les .o
 clean:
