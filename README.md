@@ -3,24 +3,26 @@
 
 #TODO:
 ###Dictionnaire:
-- Liberer_mot
 - Initialiser_mot
-- Initialiser_Dico
 - Chercher_mot
 - Get_Code
 - Get_Chaine
-- Penser à une structure de données différente pour le dico de décompression
+- Faire un tableau de correspondance code/chaine pour la decompression (penser à une structure de donnée)
 
 
 ###Compression:
 - Finir l'algo
 - Tester l'algo
 - Commenter le code
+- Ecrire un mot codé dans un fichier depuis une variable de type type_mot retourné par la fonction paquet8
 
 ###Decompression:
 - Faire l'algo
 - Tester l'algo
 - Commenter le code
+- Fonction récupération du code dans un fichier
+- Ecriture du mot decodé dans un fichier
+
 
 
 
