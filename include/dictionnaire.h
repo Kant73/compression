@@ -47,3 +47,5 @@ type_mot* paquet8(int code, int taille);
 //Renvoie le nombre de bits significatifs
 int nbr_bit(int code);
 
+//Insère en queue d'un type_mot un élement de type uint8_t
+void inserer_queue_mot(type_mot* mot, uint8_t elem)

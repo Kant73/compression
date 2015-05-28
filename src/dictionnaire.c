@@ -169,3 +169,15 @@ type_mot* paquet8(int code, int taille)
 	
 	return liste;
 }
+
+void inserer_queue_mot(type_mot* mot, uint8_t elem)
+{
+	type_mot* temp_mot = mot;
+	while(temp_mot->suivant != NULL)
+	{
+		temp_mot = temp_mot->suivant;
+	}	
+	mot->suivant = malloc(sizeof(type_mot));
+	mot->suivant->lettre = elem;
+	mot->suivant->suivant = NULL;
+}
