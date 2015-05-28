@@ -18,7 +18,7 @@
  */
 void encode(FILE* E, FILE* S, type_dico* dic)
 {
-	uint8_t a;				//Pour stocker un octet (l'octet courant)
+	/*uint8_t a;				//Pour stocker un octet (l'octet courant)
 
 	type_mot mot;			//Notre chaine d'octet
 	type_mot mot_concat;	//Contient la chaine d'octet concaténé avec l'octet courant
@@ -57,5 +57,5 @@ void encode(FILE* E, FILE* S, type_dico* dic)
 		fprintf(S, "%d", code);	
 	}
 	liberer_mot(&mot);
-	liberer_mot(&mot_concat);
+	liberer_mot(&mot_concat);*/
 }
