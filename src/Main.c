@@ -34,9 +34,9 @@ int main(int argc, char* argv[])
 	inserer_queue_mot(mot2, elem);
 
 	printf("Mot déjà ajouté : %d\n", mot2->lettre);
-	printf("Mot inseré : %d\n", mot2->suivant->lettre);
+	printf("Mot inserer : %d\n", mot2->suivant->lettre);
 	
-	//inserer_dico(mot, dictionnaire);
+	inserer_dico(mot, dictionnaire);
 	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
 	
 	afficher_dico(dictionnaire);
@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 	///////////////////////////////////////////////////////
 	
 	FILE* file;
-	//file = fopen(/*nom du fichier*/, "r");
+	file = fopen("prout", "r");
 	
 	
 	if (file == NULL)
@@ -56,8 +56,10 @@ int main(int argc, char* argv[])
 	
 	while (!feof(file)) //Lire les mots
 	{
-		
-	}
+		printf("%x", paquet8_lire(9, file));
+	}	
+	
+	printf("\n");
 	
 	fclose(file);
 	

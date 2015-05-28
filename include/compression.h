@@ -12,6 +12,6 @@
  * @param
  * @param
  */
-void encode(FILE* E, FILE* S, type_dico* dic);
+void encode(FILE* E, FILE* S, type_dico* dico);
 
 
