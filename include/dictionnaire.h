@@ -30,7 +30,7 @@ void initialiser_dico(type_dico* dico);
 void inserer_dico(type_mot* mot, type_dico* dico);
 
 //Cherche si un mot existe dans le dictionnaire (@return: -1 si pas dedans / le code du mot sinon)
-int chercher_dico(type_mot* mot, type_dico* dico);
+int chercher_code_dico(type_mot* mot, type_dico* dico);
 
 //Affiche le contenu du dictionnaire
 void afficher_dico(type_dico* dico);

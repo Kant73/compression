@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	mot->suivant->lettre = 1;
 	
 	inserer_dico(mot, dictionnaire);
-	printf("\n%d\n", chercher_dico(mot, dictionnaire));
+	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
 	
 	afficher_dico(dictionnaire);
 	

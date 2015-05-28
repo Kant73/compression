@@ -8,8 +8,9 @@ void initialiser_dico(type_dico* dico)
 	int i;
 	for (i = 0; i < 256; i++)
 	{
-		dico->branches[i] = calloc(1, sizeof(type_code));
+		dico->branches[i] = malloc(sizeof(type_code));
 		dico->branches[i]->code = i;
+		dico->branches[i]->suivant = NULL;
 	}
 }
 
@@ -32,13 +33,14 @@ void inserer_dico(type_mot* mot, type_dico* dico)
 		temp_mot = temp_mot->suivant;
 	}
 
-	temp_dico->branches[temp_mot->lettre] = calloc(1, sizeof(type_code*));
+	temp_dico->branches[temp_mot->lettre] = malloc(sizeof(type_code));
 	temp_dico->branches[temp_mot->lettre]->code = cpt;
+	temp_dico->branches[temp_mot->lettre]->suivant = NULL;
 
 	cpt++;
 }
 
-int chercher_dico(type_mot* mot, type_dico* dico)
+int chercher_code_dico(type_mot* mot, type_dico* dico)
 {
 	if (dico == NULL || mot == NULL) //Dico ou mot vide
 		return -1;
