@@ -18,7 +18,7 @@
  */
 void encode(FILE* E, FILE* S, type_dico* dico)
 {
-	uint8_t a;				//Pour stocker un octet (l'octet courant)
+	/*uint8_t a;				//Pour stocker un octet (l'octet courant)
 
 	type_mot mot;			//Notre chaine d'octet
 	type_mot mot_concat;	//Contient la chaine d'octet concaténé avec l'octet courant
@@ -74,8 +74,14 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			}
 		}
 	}
+<<<<<<< HEAD
 	//liberer_mot(mot.suivant);
 	//liberer_mot(mot_concat.suivant);
 	//liberer_dico(dico);
 	//afficher_dico(dico);
 }
+=======
+	liberer_mot(&mot);
+	liberer_mot(&mot_concat);*/
+}
+>>>>>>> ca445c554f91ae6e50a44b274d63ac19a87d6a66

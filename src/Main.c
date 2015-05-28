@@ -34,9 +34,9 @@ int main(int argc, char* argv[])
 	inserer_queue_mot(mot2, elem);
 
 	printf("Mot déjà ajouté : %d\n", mot2->lettre);
-	printf("Mot inserer : %d\n", mot2->suivant->lettre);
+	printf("Mot inseré : %d\n", mot2->suivant->lettre);
 	
-	inserer_dico(mot, dictionnaire);
+	//inserer_dico(mot, dictionnaire);
 	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
 	
 	afficher_dico(dictionnaire);

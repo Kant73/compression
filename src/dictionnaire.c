@@ -63,8 +63,8 @@ int chercher_code_dico(type_mot* mot, type_dico* dico)
 			if (temp_mot->suivant == NULL)
 				break;
 			
-			temp_mot = temp_mot->suivant;
 			temp_dico = temp_dico->branches[temp_mot->lettre]->suivant;
+			temp_mot = temp_mot->suivant;
 		}
 		else
 			return -1;
@@ -139,7 +139,7 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	//////////////
 	uint8_t temp;
 
-	if (taille + taille_s >= 8)
+	if (taille_s > 0)
 	{
 		temp = code >> (taille - 8 + taille_s);
 		uint8_t mask = -1;
@@ -172,6 +172,55 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 		buffer_s = code;
 		buffer_s = buffer_s << (8 - taille_s);
 	}
+}
+
+int paquet8_lire(int taille, FILE* S)
+{
+	if (taille <= 0)
+		return -1;
+		
+	static uint8_t buffer_s = 0;
+	static int taille_s = 0;
+	
+	//////////////
+	int result = 0;
+
+	if (taille_s > 0)
+	{
+		int temp = buffer_s;
+		temp = temp << (taille - taille_s);
+		result += temp;
+		
+		taille -= taille_s;
+	}
+	
+	taille_s = 0;
+	buffer_s = 0;
+
+	while (taille >= 8)
+	{
+		int temp2 = fgetc(S) << (taille - 8);
+		result += temp2;
+		
+		taille = taille - 8;
+	}
+	
+	if (taille > 0) //Rajouter reste
+	{	
+		taille_s = 8-taille;
+		
+		uint8_t temp = fgetc(S);
+		buffer_s = temp;
+		
+		temp = temp >> taille_s;
+		result += temp;
+		
+		uint8_t mask = -1;
+		mask = mask >> taille;
+		buffer_s &= mask;
+	}
+	
+	return result;
 }
 
 type_mot* mot_associe(type_code* arg)

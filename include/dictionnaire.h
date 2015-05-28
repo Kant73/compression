@@ -69,7 +69,11 @@ void liberer_dico(type_dico* dico);
  * @param  taille [description]
  * @return        [description]
  */
+
 void paquet8_ecrire(int code, int taille, FILE* S);
+
+int paquet8_lire(int taille, FILE* S);
+
 
 /**
  * Renvoie le nombre de bits significatifs
