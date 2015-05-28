@@ -8,7 +8,7 @@ FLAG = -DDEBUG -lm
 all: prog
 
 prog: main.o fonctions.o compression.o decompression.o dictionnaire.o
-	gcc main.o dictionnaire.o -o main -lm
+	gcc main.o dictionnaire.o compression.o -o main -lm
 	
 main.o: Main.c ../include/*.h
 	gcc -c Main.c -o main.o -I ../include $(FLAG) 
