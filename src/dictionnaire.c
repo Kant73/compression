@@ -1,4 +1,5 @@
 #include "../include/dictionnaire.h"
+#include <math.h>
 
 void initialiser_dico(type_dico* dico)
 {
@@ -47,7 +48,7 @@ int chercher_code_dico(type_mot* mot, type_dico* dico)
 		
 	type_mot* temp_mot = mot;
 	type_dico* temp_dico = dico;
-	while (true)
+	while (1)
 	{
 		if (temp_dico != NULL && temp_dico->branches[temp_mot->lettre] != NULL)
 		{
@@ -86,9 +87,9 @@ void liberer_mot(type_mot* mot)
 	type_mot* temp_mot = mot;
 	while (temp_mot != NULL)
 	{
-		mot = mot_temp->suivant;
-		free(mot_temp);
-		mot_temp = *mot;
+		mot = temp_mot->suivant;
+		free(temp_mot);
+		temp_mot = mot;
 	}
 }
 
@@ -109,5 +110,61 @@ void liberer_dico(type_dico* dico)
 	free(dico);
 }
 
+int nbr_bit(int code)
+{
+	if (code < 256)
+		return 8;
+	return log(code) / log(2);
+}
 
+type_mot* paquet8(int code, int taille)
+{
+	static uint8_t buffer_s = 0;
+	static int taille_s = 0;
+	
+	type_mot* liste = malloc(sizeof(type_mot));
+	type_mot* temp = liste;
 
+	if (taille + taille_s >= 8)
+	{
+		temp->lettre = code >> (taille - 8 + taille_s);
+		uint8_t mask = -1;
+		mask = ~(mask << (8 - taille_s));
+		temp->lettre = (temp->lettre & mask) + buffer_s; 
+		
+		taille = taille - 8 + taille_s;
+		if (taille >= 8)
+		{
+			temp->suivant = malloc(sizeof(type_mot));
+			temp = temp->suivant;
+			temp->suivant = NULL;
+		}
+	}
+	
+	taille_s = 0;
+	buffer_s = 0;
+
+	while (taille >= 8)
+	{
+		temp->lettre = code >> (taille - 8);
+		taille = taille - 8;
+		if (taille >= 8)	
+		{
+			temp->suivant = malloc(sizeof(type_mot));
+			temp = temp->suivant;
+			temp->suivant = NULL;
+		}
+	}
+	
+	if (taille > 0)
+	{
+		taille_s = taille;
+		
+		buffer_s = code;
+		buffer_s = buffer_s << (8 - taille_s);
+		printf("Taille: %d\n", taille);
+		printf("Buffer: %x\n", buffer_s);
+	}
+	
+	return liste;
+}

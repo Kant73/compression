@@ -40,3 +40,10 @@ void liberer_mot(type_mot* mot);
 
 //Libérer la mémoire occupée par un dictionnaire
 void liberer_dico(type_dico* dico);
+
+//Renvoie la liste des paquets de 8 bits
+type_mot* paquet8(int code, int taille);
+
+//Renvoie le nombre de bits significatifs
+int nbr_bit(int code);
+
