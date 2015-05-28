@@ -185,3 +185,10 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 		temp_mot->suivant->suivant = NULL;
 	}
 }
+
+
+void init_mot(type_mot* mot, uint8_t val_init)
+{
+	mot->lettre = val_init;
+	mot->suivant = NULL;
+}

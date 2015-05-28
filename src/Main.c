@@ -20,17 +20,21 @@ int main(int argc, char* argv[])
 	initialiser_dico(dictionnaire);
 	
 	type_mot* mot = calloc(1, sizeof(type_mot));
+	
 	mot->lettre = 0;
 	mot->suivant = calloc(1, sizeof(type_mot));
+
 	mot->suivant->lettre = 0;
 
+	type_mot* mot2 = malloc(sizeof(type_dico));
+	init_mot(mot2, 12);
 
 	uint8_t elem = 8;
 
-	inserer_queue_mot(mot, elem);
+	inserer_queue_mot(mot2, elem);
 
-	//printf("Mot déjà ajouté : %d\n", mot->suivant->lettre);
-	//printf("Mot inserer : %d\n", mot->suivant->suivant->lettre);
+	printf("Mot déjà ajouté : %d\n", mot2->lettre);
+	printf("Mot inserer : %d\n", mot2->suivant->lettre);
 	
 	inserer_dico(mot, dictionnaire);
 	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
