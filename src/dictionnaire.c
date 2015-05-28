@@ -29,7 +29,7 @@ void inserer_dico(type_mot* mot, type_dico* dico)
 	while (temp_mot->suivant != NULL)
 	{
 		if (temp_dico->branches[temp_mot->lettre]->suivant == NULL)
-			temp_dico->branches[temp_mot->lettre]->suivant = calloc(1, sizeof(type_dico*));
+			temp_dico->branches[temp_mot->lettre]->suivant = calloc(1, sizeof(type_dico));
 		
 		temp_dico = temp_dico->branches[temp_mot->lettre]->suivant;
 		temp_mot = temp_mot->suivant;
@@ -79,7 +79,10 @@ void afficher_dico(type_dico* dico)
 		
 		printf("\n");
 		for (i = 0; i < 256; i++)
-			afficher_dico(dico->branches[i]->suivant);
+		{
+			if (dico->branches[i] != NULL)
+				afficher_dico(dico->branches[i]->suivant);
+		}
 	}
 }
 
@@ -163,8 +166,6 @@ type_mot* paquet8(int code, int taille)
 		
 		buffer_s = code;
 		buffer_s = buffer_s << (8 - taille_s);
-		printf("Taille: %d\n", taille);
-		printf("Buffer: %x\n", buffer_s);
 	}
 	
 	return liste;

@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	type_mot* mot = calloc(1, sizeof(type_mot));
 	mot->lettre = 0;
 	mot->suivant = calloc(1, sizeof(type_mot));
-	mot->suivant->lettre = 1;
+	mot->suivant->lettre = 0;
 	
 	inserer_dico(mot, dictionnaire);
 	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
