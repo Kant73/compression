@@ -35,7 +35,7 @@ void initialiser_dico(type_dico* dico);
  * @param mot  [description]
  * @param dico [description]
  */
-void inserer_dico(type_mot* mot, type_dico* dico);
+void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S);
 
 /**
  * Cherche si un mot existe dans le dictionnaire
@@ -69,7 +69,7 @@ void liberer_dico(type_dico* dico);
  * @param  taille [description]
  * @return        [description]
  */
-void paquet8(int code, int taille, FILE* S);
+void paquet8_ecrire(int code, int taille, FILE* S);
 
 /**
  * Renvoie le nombre de bits significatifs

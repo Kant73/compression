@@ -17,9 +17,9 @@ void initialiser_dico(type_dico* dico)
 	}
 }
 
-void inserer_dico(type_mot* mot, type_dico* dico)
+void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 {
-	static int cpt = 256;
+	static int cpt = 258;
 	
 	if (dico == NULL || mot == NULL || mot->suivant == NULL) //Dico ou mot vide
 		return;
@@ -41,6 +41,12 @@ void inserer_dico(type_mot* mot, type_dico* dico)
 	temp_dico->branches[temp_mot->lettre]->suivant = NULL;
 
 	cpt++;
+	
+	if (cpt == pow(*taille_code, 2) - 1)
+	{
+		(*taille_code) ++;
+		paquet8_ecrire(256, 9, S);
+	}
 }
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
@@ -122,7 +128,7 @@ int nbr_bit(int code)
 	return log((double)code) / log(2.0);
 }
 
-void paquet8(int code, int taille, FILE* S)
+void paquet8_ecrire(int code, int taille, FILE* S)
 {
 	if (taille <= 0)
 		return;
