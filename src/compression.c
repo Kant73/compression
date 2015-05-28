@@ -23,7 +23,7 @@ void encode(FILE* E, FILE* S, type_dico* dic)
 	type_mot mot;			//Notre chaine d'octet
 	type_mot mot_concat;	//Contient la chaine d'octet concaténé avec l'octet courant
 	int code = -1;			//Contient le code d'une chaine d'octet
-	int taille = 0;
+	int taille_code_max = 9;
 	//initialisation du Dico
 	initialiser_dico(dic);
 
@@ -39,17 +39,16 @@ void encode(FILE* E, FILE* S, type_dico* dic)
 	{									//que le fichier n'est pas ouvert
 		while(!feof(E))					//Tant qu'on atteint pas la fin de fichier
 		{
-			a = (uint8_t)fgetc(E);				//On stock dans a le caractère courant
+			a = (uint8_t)fgetc(E);				//On stocke dans a le caractère courant
 			insere_queue_mot(mot_concat, a);	//On insère en queue de notre chaine d'octet l'octet courant
-			if ( (code = chercher_mot(mot_concat)) >= 0)	//On stock dans code le code du mot concatener
+			if ( (code = chercher_mot(mot_concat)) >= 0)	//On stocke dans code le code du mot concatener
 			{
 				mot = mot_concat;
 			}
 			else 
 			{
-				taille = nbr_bit(code);
-				//paquet8_ecrire(code, taille, S); 	//ecrire dans le fichier le code du mot
-				inserer_dico(&mot_concat, dic);
+				//paquet8_ecrire(code, taille_code_max, S); 	//ecrire dans le fichier le code du mot
+				inserer_dico(&mot_concat, dic, &taille_code_max, S);
 				liberer_mot(&mot);
 				init_mot(&mot, a);
 			}
