@@ -3,15 +3,15 @@
 #NAVARRO Elsa
 #POPEK Florian
 
-FLAG = -DDEBUG
+FLAG = -DDEBUG -lm
 
 all: prog
 
 prog: main.o fonctions.o compression.o decompression.o dictionnaire.o
-	gcc main.o dictionnaire.o -o main
+	gcc main.o dictionnaire.o -o main -lm
 	
 main.o : Main.c ../include/*.h
-	gcc -c Main.c -o main.o -I ../include $(FLAG)
+	gcc -c Main.c -o main.o -I ../include $(FLAG) 
 	
 fonctions.o: Fonctions.c ../include/*.h
 	gcc -c Fonctions.c -o fonctions.o -I ../include $(FLAG)
@@ -33,6 +33,6 @@ clean:
 	rm -rf ../*~
 	
 #Supprimer l'éxécutable
-mrproprer: clean
-	rm main
+mrproper: clean
+	rm -rf main
 	

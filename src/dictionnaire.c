@@ -1,5 +1,6 @@
-#include "../include/dictionnaire.h"
 #include <math.h>
+
+#include "../include/dictionnaire.h"
 
 void initialiser_dico(type_dico* dico)
 {
@@ -114,7 +115,7 @@ int nbr_bit(int code)
 {
 	if (code < 256)
 		return 8;
-	return log(code) / log(2);
+	return log((double)code) / log(2.0);
 }
 
 type_mot* paquet8(int code, int taille)

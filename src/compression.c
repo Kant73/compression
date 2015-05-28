@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "compression.h"
-#include "dictionnaire.h"
+#include "../include/dictionnaire.h"
+#include "../include/compression.h"
 
 /**
  * [encode description]
@@ -16,8 +16,8 @@
  * @param S 	Le fichier qui contient le fichier encoder
  * @param dic 	Le dictionnaire
  */
-void encode(file* E, file* S, type_dico* dic)
-{
+void encode(FILE* E, FILE* S, type_dico* dic)
+{/*
 	uint8_t a;				//Pour stocker un octet (l'octet courant)
 
 	type_mot mot;			//Notre chaine d'octet
@@ -57,7 +57,5 @@ void encode(file* E, file* S, type_dico* dic)
 		fprintf(S, "%d", code);	
 	}
 	liberer_mot(mot);
-	liberer_mot(mot_concat);
-
-
+	liberer_mot(mot_concat);*/
 }
