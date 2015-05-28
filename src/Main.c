@@ -24,9 +24,10 @@ int main(int argc, char* argv[])
 	mot->suivant = calloc(1, sizeof(type_mot));
 	mot->suivant->lettre = 1;
 	
-	inserer(mot, dictionnaire);
+	inserer_dico(mot, dictionnaire);
+	printf("\n%d\n", chercher_dico(mot, dictionnaire));
 	
-	afficher(dictionnaire);
+	afficher_dico(dictionnaire);
 	
 	liberer_mot(mot);
 	///////////////////////////////////////////////////////

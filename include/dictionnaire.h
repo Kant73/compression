@@ -29,7 +29,7 @@ void initialiser_dico(type_dico* dico);
 //Insere un mot dans le dictionnaire
 void inserer_dico(type_mot* mot, type_dico* dico);
 
-//Cherche si un mot existe dans le dictionnaire (@return: 0 si pas dedans / 1 si dedans)
+//Cherche si un mot existe dans le dictionnaire (@return: -1 si pas dedans / le code du mot sinon)
 int chercher_dico(type_mot* mot, type_dico* dico);
 
 //Affiche le contenu du dictionnaire
@@ -37,3 +37,6 @@ void afficher_dico(type_dico* dico);
 
 //Libérer la mémoire occupée par un mot
 void liberer_mot(type_mot* mot);
+
+//Libérer la mémoire occupée par un dictionnaire
+void liberer_dico(type_dico* dico);

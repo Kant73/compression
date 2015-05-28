@@ -41,20 +41,25 @@ void inserer_dico(type_mot* mot, type_dico* dico)
 int chercher_dico(type_mot* mot, type_dico* dico)
 {
 	if (dico == NULL || mot == NULL) //Dico ou mot vide
-		return;
+		return -1;
 		
 	type_mot* temp_mot = mot;
 	type_dico* temp_dico = dico;
-	while (temp_mot != NULL)
+	while (true)
 	{
-		if (temp_dico->branches[temp_mot->lettre]->suivant != NULL)
+		if (temp_dico != NULL && temp_dico->branches[temp_mot->lettre] != NULL)
+		{
+			if (temp_mot->suivant == NULL)
+				break;
+			
+			temp_mot = temp_mot->suivant;
 			temp_dico = temp_dico->branches[temp_mot->lettre]->suivant;
+		}
 		else
-			return 0;	
-		temp_mot = temp_mot->suivant;
+			return -1;
 	}
-
-	return 1;
+	
+	return temp_dico->branches[temp_mot->lettre]->code;
 }
 
 void afficher_dico(type_dico* dico)
@@ -84,3 +89,23 @@ void liberer_mot(type_mot* mot)
 		mot_temp = *mot;
 	}
 }
+
+void liberer_dico(type_dico* dico)
+{
+	if (dico == NULL)
+		return;
+		
+	int i;
+	for (i = 0; i < 256; i++)
+	{
+		if (dico->branches[i] != NULL)
+		{
+			liberer_dico(dico->branches[i]->suivant);
+			free(dico->branches[i]);
+		}
+	}
+	free(dico);
+}
+
+
+
