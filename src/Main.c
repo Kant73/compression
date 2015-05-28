@@ -23,6 +23,14 @@ int main(int argc, char* argv[])
 	mot->lettre = 0;
 	mot->suivant = calloc(1, sizeof(type_mot));
 	mot->suivant->lettre = 0;
+
+
+	uint8_t elem = 8;
+
+	inserer_queue_mot(mot, elem);
+
+	//printf("Mot déjà ajouté : %d\n", mot->suivant->lettre);
+	//printf("Mot inserer : %d\n", mot->suivant->suivant->lettre);
 	
 	inserer_dico(mot, dictionnaire);
 	printf("\n%d\n", chercher_code_dico(mot, dictionnaire));
