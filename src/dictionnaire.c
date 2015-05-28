@@ -13,6 +13,7 @@ void initialiser_dico(type_dico* dico)
 		dico->branches[i] = malloc(sizeof(type_code));
 		dico->branches[i]->code = i;
 		dico->branches[i]->suivant = NULL;
+		dico->branches[i]->parent = NULL;
 	}
 }
 
@@ -121,28 +122,28 @@ int nbr_bit(int code)
 	return log((double)code) / log(2.0);
 }
 
-type_mot* paquet8(int code, int taille)
+void paquet8(int code, int taille, FILE* S)
 {
+	if (taille <= 0)
+		return;
+		
 	static uint8_t buffer_s = 0;
 	static int taille_s = 0;
 	
-	type_mot* liste = malloc(sizeof(type_mot));
-	type_mot* temp = liste;
+	//////////////
+	uint8_t temp;
 
 	if (taille + taille_s >= 8)
 	{
-		temp->lettre = code >> (taille - 8 + taille_s);
+		temp = code >> (taille - 8 + taille_s);
 		uint8_t mask = -1;
 		mask = ~(mask << (8 - taille_s));
-		temp->lettre = (temp->lettre & mask) + buffer_s; 
+		temp = (temp & mask) + buffer_s; 
+		
+		//Ecrire dans le fichier le mot temp
+		fprintf(S, "%c", temp);
 		
 		taille = taille - 8 + taille_s;
-		if (taille >= 8)
-		{
-			temp->suivant = malloc(sizeof(type_mot));
-			temp = temp->suivant;
-			temp->suivant = NULL;
-		}
 	}
 	
 	taille_s = 0;
@@ -150,14 +151,12 @@ type_mot* paquet8(int code, int taille)
 
 	while (taille >= 8)
 	{
-		temp->lettre = code >> (taille - 8);
+		temp = code >> (taille - 8);
+		
+		//Ecrire dans le fichier le mot temp
+		fprintf(S, "%c", temp);
+		
 		taille = taille - 8;
-		if (taille >= 8)	
-		{
-			temp->suivant = malloc(sizeof(type_mot));
-			temp = temp->suivant;
-			temp->suivant = NULL;
-		}
 	}
 	
 	if (taille > 0)
@@ -166,6 +165,27 @@ type_mot* paquet8(int code, int taille)
 		
 		buffer_s = code;
 		buffer_s = buffer_s << (8 - taille_s);
+	}
+}
+
+type_mot* mot_associe(type_code* arg)
+{
+	if (arg == NULL)
+		return NULL;
+		
+	type_mot* liste = malloc(sizeof(type_mot));
+	type_mot* temp = liste;
+	
+	temp->lettre = arg->code;
+	while (arg->parent != NULL)
+	{
+		temp->suivant = malloc(sizeof(type_mot));
+		temp = temp->suivant;
+		temp->suivant = NULL;
+		
+		arg = arg->parent;
+		
+		temp->lettre = arg->code;
 	}
 	
 	return liste;
@@ -177,9 +197,8 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 	{
 		type_mot* temp_mot = mot;
 		while(temp_mot->suivant != NULL)
-		{
 			temp_mot = temp_mot->suivant;
-		}	
+			
 		temp_mot->suivant = malloc(sizeof(type_mot));
 		temp_mot->suivant->lettre = elem;
 		temp_mot->suivant->suivant = NULL;
@@ -189,6 +208,9 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 
 void init_mot(type_mot* mot, uint8_t val_init)
 {
+	if (mot == NULL)
+		return;
+		
 	mot->lettre = val_init;
 	mot->suivant = NULL;
 }

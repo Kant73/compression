@@ -69,7 +69,7 @@ void liberer_dico(type_dico* dico);
  * @param  taille [description]
  * @return        [description]
  */
-type_mot* paquet8(int code, int taille);
+void paquet8(int code, int taille, FILE* S);
 
 /**
  * Renvoie le nombre de bits significatifs
@@ -77,6 +77,15 @@ type_mot* paquet8(int code, int taille);
  * @return      [description]
  */
 int nbr_bit(int code);
+
+/**
+ * Remonte le dictionnaire afin de trouver le mot
+ * @param  arg  [description]
+ * @return      [description]
+ */
+type_mot* mot_associe(type_code* arg);
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * [inserer_queue_mot description]

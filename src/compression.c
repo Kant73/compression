@@ -31,9 +31,8 @@ void encode(FILE* E, FILE* S, type_dico* dic)
 	E = fopen("entree.txt", "r");
 	S = fopen("sortie.txt", "w");
 
-	init_mot(mot, (uint8_t)fgetc(E));	//On initialise le mot avec le premier octet de E
+	init_mot(&mot, (uint8_t)fgetc(E));	//On initialise le mot avec le premier octet de E
 										//Correspond à w <- [1er octet de E]
-
 	
 	mot_concat = mot;
 	if (E != NULL)						//On teste si E n'est pas null ce qui signifierai 
@@ -52,7 +51,7 @@ void encode(FILE* E, FILE* S, type_dico* dic)
 				//paquet8_ecrire(code, taille, S); 	//ecrire dans le fichier le code du mot
 				inserer_dico(&mot_concat, dic);
 				liberer_mot(&mot);
-				init_mot(mot, a);
+				init_mot(&mot, a);
 			}
 		}
 		fprintf(S, "%d", code);	
