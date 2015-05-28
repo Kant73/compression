@@ -46,5 +46,4 @@ void decode(FILE* E, FILE* S, type_dico* dico){/*
 				w= getChaine(i, dico);
 			}
 	}*/
-
 }
