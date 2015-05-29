@@ -7,7 +7,7 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 		return;
 	
 	mode = m;
-	cpt = 258;
+	cpt = 259;
 
 	int i;
 	for (i = 0; i < 256; i++)
@@ -41,7 +41,7 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 {
 	if (dico == NULL || mot == NULL || mot->suivant == NULL) //Dico ou mot vide
 		return;
-	
+
 	type_dico* temp_dico = dico;
 	type_mot* temp_mot = mot;
 	
@@ -50,10 +50,10 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 		if (temp_dico->branches[temp_mot->lettre]->suivant == NULL)
 		{
 			temp_dico->branches[temp_mot->lettre]->suivant = calloc(1, sizeof(type_dico));
+			temp_dico->branches[temp_mot->lettre]->suivant->parent = malloc(sizeof(type_cellule));
 			temp_dico->branches[temp_mot->lettre]->suivant->parent->dico_contenant = temp_dico;
 			temp_dico->branches[temp_mot->lettre]->suivant->parent->indice = temp_mot->lettre;
 		}
-
 		temp_dico = temp_dico->branches[temp_mot->lettre]->suivant;
 		temp_mot = temp_mot->suivant;
 	}
@@ -70,7 +70,7 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 	if (cpt == pow(*taille_code, 2) - 1)
 	{
 		(*taille_code) ++;
-		paquet8_ecrire(256, 9, S);
+		paquet8_ecrire(257, 9, S);
 	}
 
 }
@@ -168,7 +168,7 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 {
 	if (taille <= 0) //Taille invalide
 		return;
-	
+
 	//Initialisation des statics
 	static uint8_t buffer_s = 0;
 	static int taille_s = 0;
@@ -207,7 +207,7 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	#ifdef DEBUG
 		printf("paquet8_ecrire:\n");
 		printf("\tTaille buffer: %d\n", taille_s);
-		printf("\tBuffer: %s\n", to_binaire(buffer_s >> (8 - taille_s)));
+		printf("\tBuffer: %s\n", to_binaire(buffer_s));
 	#endif
 }
 
@@ -276,12 +276,12 @@ void affecter_mot(type_mot* mot1, type_mot* mot2)
 		return;
 
 	type_mot* temp = mot1->suivant;
-	while (temp != NULL)
+	/*while (temp != NULL)
 	{
 		type_mot* temp2 = temp->suivant;
 		free(temp);
 		temp = temp2;
-	}
+	}*/
 
 
 	mot1->lettre = mot2->lettre;
