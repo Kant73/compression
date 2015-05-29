@@ -47,6 +47,7 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 		(*taille_code) ++;
 		paquet8_ecrire(256, 9, S);
 	}
+
 }
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
@@ -130,25 +131,22 @@ int nbr_bit(int code)
 
 void paquet8_ecrire(int code, int taille, FILE* S)
 {
-	if (taille <= 0)
+	if (taille <= 0) //Taille invalide
 		return;
-		
+	
+	//Initialisation des statics
 	static uint8_t buffer_s = 0;
 	static int taille_s = 0;
 	
 	//////////////
-	uint8_t temp;
+	uint8_t temp; //Valeur à retourner
 
-	if (taille_s > 0)
+	if (taille_s > 0) //Si le buffer n'est pas vide
 	{
-		temp = code >> (taille - 8 + taille_s);
-		uint8_t mask = -1;
-		mask = ~(mask << (8 - taille_s));
-		temp = (temp & mask) + buffer_s; 
+		temp = (code >> (taille - 8 + taille_s)) + buffer_s;
 		
 		//Ecrire dans le fichier le mot temp
-		fprintf(S, "%c", temp);
-		
+		fprintf(S, "%c", temp);	
 		taille = taille - 8 + taille_s;
 	}
 	
@@ -168,10 +166,23 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	if (taille > 0)
 	{
 		taille_s = taille;
-		
-		buffer_s = code;
-		buffer_s = buffer_s << (8 - taille_s);
+		buffer_s = code << (8 - taille_s);
 	}
+
+	#ifdef DEBUG
+		printf("paquet8_ecrire:\n");
+		printf("\tTaille buffer: %d\n", taille_s);
+		printf("\tBuffer: %s\n", to_binaire(buffer_s >> (8 - taille_s)));
+	#endif
+}
+
+
+char * to_binaire(unsigned long int arg)
+{
+    static char buffer [1+sizeof (unsigned long int)*8] = { 0 };
+    char *p=buffer-1+sizeof (unsigned long int)*8;
+    do { *--p = '0' + (arg & 1); arg >>= 1; } while (arg);
+    return p;
 }
 
 int paquet8_lire(int taille, FILE* S)

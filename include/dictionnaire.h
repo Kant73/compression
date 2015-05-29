@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdio.h>
 
 typedef struct type_dico type_dico;
 typedef struct type_code type_code;
@@ -104,3 +104,5 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem);
  * @param val_init La valeur que l'on va affecter à l'attribut lettre du mot "mot"
  */
 void init_mot(type_mot* mot, uint8_t val_init);
+
+char* to_binaire(unsigned long int arg);
