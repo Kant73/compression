@@ -63,6 +63,7 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			//printf("mot_concat.lettre %d\n", mot_concat.lettre);
 			//printf("mot_concat.suivant->lettre %d\n", mot_concat.suivant->lettre);
 			code = chercher_code_dico(&mot_concat, dico);
+			afficher_mot(&mot_concat);
 			printf("Code mot_concat %d\n", code);
 			if (code >= 0)	//On stocke dans code le code du mot concatener
 			{
@@ -86,7 +87,10 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			{
 				
 				code_mot = chercher_code_dico(&mot, dico);
+
+				
 				printf("Emis %d\n", code_mot);
+				//printf("\t\t\t\t\tCode %s\n", to_binaire(code_mot));
 				paquet8_ecrire(code_mot, taille_code_max, S); 	//ecrire dans le fichier le code du mot
 				inserer_dico(&mot_concat, dico, &taille_code_max, S);
 				liberer_mot(mot.suivant);
@@ -101,8 +105,7 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 
 		}
 	}
-	code_mot = chercher_code_dico(&mot, dico);
-	paquet8_ecrire(code_mot, taille_code_max, S);
+	paquet8_ecrire(256, taille_code_max, S); //Fin de fichier -> 256
 	//liberer_mot(mot.suivant);
 	//liberer_mot(mot_concat.suivant);
 	//liberer_dico(dico);
