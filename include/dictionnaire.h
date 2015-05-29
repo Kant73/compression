@@ -5,17 +5,18 @@
 typedef struct type_dico type_dico;
 typedef struct type_code type_code;
 typedef struct type_mot type_mot;
+typedef struct type_cellule type_cellule;
 
 struct type_dico
 {
 	type_code* branches[256];
+	type_cellule* parent;
 };
 
 struct type_code
 {
 	int code;
 	type_dico* suivant;
-	type_dico* parent;
 };
 
 struct type_mot
@@ -24,92 +25,63 @@ struct type_mot
 	type_mot* suivant;
 };
 
-/**
- * Initialise le dictionnaire avec les monomes
- * @param dico [description]
- */
-void initialiser_dico(type_dico* dico);
+struct type_cellule
+{
+	uint8_t indice;
+	type_dico* dico_contenant;
+};
 
-/**
- * Insere un mot dans le dictionnaire
- * @param mot  [description]
- * @param dico [description]
- */
+enum type_enum
+{
+	COMP = 0,
+	DECOMP
+};
+
+//////////////
+////GLOBAL////
+//////////////
+type_cellule* tableau[16];	//Exclusif décompression
+enum type_enum mode; 		//Compression ou décompression
+int cpt; 					//Compteur des codes
+//////////////
+
+//Initialise le dictionnaire (dico doit avoir été aloué), m pour compression ou décompression
+void initialiser_dico(type_dico* dico, enum type_enum m);
+
+//Insère un mot dans le dictionnaire. Génère le code associé et change la taille du code si nécessaire (ex: cpt = 511, taille_code = 9 -> taille_code = 10)
 void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S);
 
-/**
- * Cherche si un mot existe dans le dictionnaire
- * @param  mot  [description]
- * @param  dico [description]
- * @return      -1 si pas dedans / le code du mot sinon
- */
-int chercher_code_dico(type_mot* mot, type_dico* dico);
+//Ajoute un élément dans le tableau des codes (exclusif décompression)
+void ajouter_element(uint8_t i, type_dico* d);
 
-/**
- * Affiche le contenu du dictionnaire
- * @param dico [description]
- */
+//Recherche le code associé à un mot
+int chercher_code_dico(type_mot* mot, type_dico* dico);
+//Recherche le mot associé à un code
+type_mot* chercher_mot_dico(int code, type_dico* dico);
+
+//Affiche le dictionnaire
 void afficher_dico(type_dico* dico);
 
-/**
- * Libérer la mémoire occupée par un mot
- * @param mot [description]
- */
+//Libérer un mot
 void liberer_mot(type_mot* mot);
-
-/**
- * Libérer la mémoire occupée par un dictionnaire
- * @param dico [description]
- */
+//Libérer le dictionnaire
 void liberer_dico(type_dico* dico);
 
-/**
- * Renvoie la liste des paquets de 8 bits
- * @param  code   [description]
- * @param  taille [description]
- * @return        [description]
- */
-
+//Ecrit dans le fichier les octets, mémorise les bits restants
 void paquet8_ecrire(int code, int taille, FILE* S);
-
+//Lit dans le fichier les octets, mémorise les bits restants
 int paquet8_lire(int taille, FILE* S);
 
+//Remonte le dictionnaire pour chercher le mot associé
+type_mot* mot_associe(type_dico* dico, uint8_t indice);
 
-/**
- * Renvoie le nombre de bits significatifs
- * @param  code [description]
- * @return      [description]
- */
-int nbr_bit(int code);
-
-/**
- * Remonte le dictionnaire afin de trouver le mot
- * @param  arg  [description]
- * @return      [description]
- */
-type_mot* mot_associe(type_code* arg);
-
-////////////////////////////////////////////////////////////////////////////////////////////
-
-/**
- * [inserer_queue_mot description]
- * @param mot  [description]
- * @param elem [description]
- */
 void inserer_queue_mot(type_mot* mot, uint8_t elem);
-
-/**
- * Initialise un nouveau mot avec la valeur val_init et affecte son pointeur suivant à NULL
- * @param mot      Le mot qu'on veut initialiser
- * @param val_init La valeur que l'on va affecter à l'attribut lettre du mot "mot"
- */
 void init_mot(type_mot* mot, uint8_t val_init);
 
-
-
+//Permet de printf en binaire (%s)
 char* to_binaire(unsigned long int arg);
 
 //mot1 <- mot2
 void affecter_mot(type_mot* mot1, type_mot* mot2);
-
+//Affiche un mot
 void afficher_mot(type_mot* mot);
