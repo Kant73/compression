@@ -276,13 +276,12 @@ void affecter_mot(type_mot* mot1, type_mot* mot2)
 		return;
 
 	type_mot* temp = mot1->suivant;
-	/*while (temp != NULL)
+	while (temp != NULL)
 	{
 		type_mot* temp2 = temp->suivant;
 		free(temp);
 		temp = temp2;
-	}*/
-
+	}
 
 	mot1->lettre = mot2->lettre;
 	mot1->suivant = NULL;

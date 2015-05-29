@@ -22,6 +22,7 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 
 	type_mot mot;			//Notre chaine d'octet
 	type_mot mot_concat;	//Contient la chaine d'octet concaténé avec l'octet courant
+	mot_concat.suivant = NULL;
 	int code = -1;			//Contient le code d'une chaine d'octet
 	int code_mot = -1;
 	int taille_code_max = 9;
@@ -93,8 +94,8 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 				//printf("\t\t\t\t\tCode %s\n", to_binaire(code_mot));
 				paquet8_ecrire(code_mot, taille_code_max, S); 	//ecrire dans le fichier le code du mot
 				inserer_dico(&mot_concat, dico, &taille_code_max, S);
-				liberer_mot(mot.suivant);
-				liberer_mot(mot_concat.suivant);
+				liberer_mot(mot.suivant); mot.suivant = NULL;
+				liberer_mot(mot_concat.suivant); mot_concat.suivant = NULL;
 				init_mot(&mot, a);
 				printf("mot.lettre %d\n", mot.lettre);
 				//printf("Pointeur sur mot suivant : %d\n", mot.suivant);
