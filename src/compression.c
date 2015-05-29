@@ -23,11 +23,11 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 	type_mot mot;			//Notre chaine d'octet
 	type_mot mot_concat;	//Contient la chaine d'octet concaténé avec l'octet courant
 	mot_concat.suivant = NULL;
-	int code = -1;			//Contient le code d'une chaine d'octet
-	int code_mot = -1;
+	int code;			//Contient le code d'une chaine d'octet
+	int code_mot;
 	int taille_code_max = 9;
-	//initialisation du Dico
-	initialiser_dico(dico, COMP);
+	
+	initialiser_dico(dico, COMP); //initialisation du Dico
 
 	//A modifier : on ouvrira les fichier dans le main
 	E = fopen("entree.txt", "r");
@@ -86,7 +86,6 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			}
 			else 
 			{
-				
 				code_mot = chercher_code_dico(&mot, dico);
 
 				
