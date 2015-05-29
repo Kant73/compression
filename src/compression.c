@@ -26,7 +26,7 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 	int code_mot = -1;
 	int taille_code_max = 9;
 	//initialisation du Dico
-	initialiser_dico(dico);
+	initialiser_dico(dico, COMP);
 
 	//A modifier : on ouvrira les fichier dans le main
 	E = fopen("entree.txt", "r");
@@ -40,22 +40,25 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 	{									//que le fichier n'est pas ouvert
 		while(!feof(E))					//Tant qu'on atteint pas la fin de fichier
 		{
-			mot_concat = mot;
+			//mot_concat = mot;
+
+			affecter_mot(&mot_concat, &mot);
+
 			a = fgetc(E);				//On stocke dans a le caractère courant
 			inserer_queue_mot(&mot_concat, a);	//On insère en queue de notre chaine d'octet l'octet courant
 			type_mot* tmp = &mot_concat;
 			while(tmp != NULL)
 			{
-				printf("%d\n", tmp->lettre);
+				printf("mot_concat: %d\n", tmp->lettre);
 				tmp = tmp->suivant;
 			}
 
 			type_mot* tmp2 = &mot;
-				while(tmp2 != NULL)
-				{
-					printf("mot :%d\n", tmp2->lettre);
-					tmp2 = tmp2->suivant;
-				}
+			while(tmp2 != NULL)
+			{
+				printf("mot :%d\n", tmp2->lettre);
+				tmp2 = tmp2->suivant;
+			}
 			
 			//printf("mot_concat.lettre %d\n", mot_concat.lettre);
 			//printf("mot_concat.suivant->lettre %d\n", mot_concat.suivant->lettre);
@@ -63,13 +66,20 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			printf("Code mot_concat %d\n", code);
 			if (code >= 0)	//On stocke dans code le code du mot concatener
 			{
-				mot = mot_concat;
+				//mot = mot_concat;
+				//affecter_mot(&mot, &mot_concat);
+				inserer_queue_mot(&mot, a);
 				/*type_mot* tmp = &mot;
 				while(tmp != NULL)
 				{
 					printf("%d\n", tmp->lettre);
 					tmp = tmp->suivant;
 				}*/
+				printf("Mot_concat: ");
+				afficher_mot(&mot_concat);
+				
+				printf("mot: ");
+				afficher_mot(&mot);
 				
 			}
 			else 
@@ -86,10 +96,15 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 				//printf("Pointeur sur mot suivant : %d\n", mot.suivant);
 
 			}
+
+			
+
 		}
 	}
+	code_mot = chercher_code_dico(&mot, dico);
+	paquet8_ecrire(code_mot, taille_code_max, S);
 	//liberer_mot(mot.suivant);
 	//liberer_mot(mot_concat.suivant);
 	//liberer_dico(dico);
-	//afficher_dico(dico);
+	afficher_dico(dico);
 }
