@@ -12,6 +12,7 @@
 	//lecture et écriture binaire
 	//lecture en mode "buffer"
 
+
 void decode(FILE* E, FILE* S){
 	type_dico* dico;
 	int i,j; //index dans D
@@ -27,7 +28,7 @@ void decode(FILE* E, FILE* S){
 	{
 
 		i = paquet8_lire(E, &taille_codes); 		//récupère un premier code
-		a = chercher_chaine_dico(i, dico)->lettre; //a chaine cherchée, i code de la chaine ds le dico
+		a = chercher_mot_dico(i, dico)->lettre; //a chaine cherchée, i code de la chaine ds le dico
 		mot.lettre =a;
 		ecrire_lettre(S, mot); 			//On écrit le mot sur le fichier de sortie
 
@@ -35,19 +36,19 @@ void decode(FILE* E, FILE* S){
 			{
 				j=paquet8_lire(E, &taille_codes); //on récupère l'entier suivant
 
-				if(chercher_chaine_dico(i, dico)!=NULL){
-					mot2 = *chercher_chaine_dico(i, dico);
+				if(chercher_mot_dico(i, dico)!=NULL){
+					mot2 = *chercher_mot_dico(i, dico);
 					insereQueue(&mot2, a);
 				}
 				else{
-					mot2 = *chercher_chaine_dico(j, dico);
+					mot2 = *chercher_mot_dico(j, dico);
 				}
 				ecrire_lettre(S, mot2);
 				a = mot2.lettre;
 				insere_queue(&mot, a);
 				inserer_dico(&mot, dico, &taille_codes, S);
 				i=j;
-				mot = *chercher_chaine_dico(i, dico);
+				mot = *chercher_mot_dico(i, dico);
 			}
 	}
 }
