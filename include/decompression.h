@@ -11,3 +11,4 @@
  * @param dictionnaire dico
  */
 void decode(FILE* E, FILE* S);
+void ecrire_lettre(FILE* S, type_mot* mot);
