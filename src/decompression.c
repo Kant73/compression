@@ -39,25 +39,24 @@ void decode(FILE* E, FILE* S){
 
 		printf("mot : \n");
 		afficher_mot(&mot);
-		printf("fin afficher_mot\n");
-		printf("&Mot : %p \n", mot);
+		printf("Ecriture du mot\n");
 
 		ecrire_lettre(S, &mot); 			//On écrit le mot sur le fichier de sortie
 
 		while(!feof(E))					//Tant qu'on atteint pas la fin de fichier
 			{
 
-				printf("entree boucle\n");
+				printf("!---------------entree boucle--------------!\n");
 
 				j=paquet8_lire(taille_codes, E); //on récupère l'entier suivant
 
 				printf("code j : %d \n", j);
 
-				if(chercher_mot_dico(i, dico)!=NULL){
+				if(chercher_mot_dico(j, dico)==NULL){
 
-					printf("Le mot est dans le dictionnaire \n");
+					printf("Le mot n'est pas dans le dictionnaire \n");
 
-					mot2 = *chercher_mot_dico(i, dico);
+					affecter_mot(&mot2, chercher_mot_dico(i, dico));
 
 					printf("mot2 : \n");
 					afficher_mot(&mot2);
@@ -70,7 +69,8 @@ void decode(FILE* E, FILE* S){
 
 					printf("Le mot n'est pas dans le dictionnaire \n");
 
-					mot2 = *chercher_mot_dico(j, dico);
+					affecter_mot(&mot2, chercher_mot_dico(j, dico));
+					//mot2 = *chercher_mot_dico(j, dico);
 
 					printf("mot2 : \n");
 					afficher_mot(&mot2);
@@ -89,14 +89,14 @@ void decode(FILE* E, FILE* S){
 				printf("Insertion dans le dico du mot : \n");
 				afficher_mot(&mot);
 
-				printf("Insertion dans le dico \n");
-
 				inserer_dico(&mot, dico, &taille_codes, S);
 
-				printf("Insertion terminée \n");
+				printf("Insertion terminée , on charge le mot suivant de code %d dans mot\n", j);
 
 				i=j;
-				mot = *chercher_mot_dico(i, dico);
+				affecter_mot(&mot, chercher_mot_dico(i, dico));
+				//mot = *chercher_mot_dico(i, dico);
+				printf("!-----------fin de boucle------------!\n");
 			}
 	}
 }
