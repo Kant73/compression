@@ -163,7 +163,7 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 		taille = taille - 8;
 	}
 	
-	if (taille > 0)
+	if (taille > 0)	
 	{
 		taille_s = taille;
 		buffer_s = code << (8 - taille_s);
@@ -233,6 +233,47 @@ int paquet8_lire(int taille, FILE* S)
 	
 	return result;
 }
+
+
+void affecter_mot(type_mot* mot1, type_mot* mot2)
+{
+	if (mot1 == NULL || mot2 == NULL)
+		return;
+
+	type_mot* temp = mot1->suivant;
+	while (temp != NULL)
+	{
+		type_mot* temp2 = temp->suivant;
+		free(temp);
+		temp = temp2;
+	}
+
+
+	mot1->lettre = mot2->lettre;
+	mot1->suivant = NULL;
+
+	temp = mot1;
+	mot2 = mot2->suivant;
+	while (mot2 != NULL)
+	{
+		temp->suivant = malloc(sizeof(type_mot));
+		temp = temp->suivant;
+
+		temp->lettre = mot2->lettre;
+		mot2 = mot2->suivant;
+	}	
+}
+
+void afficher_mot(type_mot* mot)
+{
+	while (mot != NULL)
+	{
+		printf("%c", mot->lettre);
+		mot = mot->suivant;
+	}
+	printf("\n");
+}
+
 
 type_mot* mot_associe(type_code* arg)
 {

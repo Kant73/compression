@@ -105,4 +105,11 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem);
  */
 void init_mot(type_mot* mot, uint8_t val_init);
 
+
+
 char* to_binaire(unsigned long int arg);
+
+//mot1 <- mot2
+void affecter_mot(type_mot* mot1, type_mot* mot2);
+
+void afficher_mot(type_mot* mot);

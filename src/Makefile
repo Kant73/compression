@@ -3,7 +3,7 @@
 #NAVARRO Elsa
 #POPEK Florian
 
-FLAG = -DDEBUG -lm
+FLAG = -DDEBUG -w -lm
 
 all: prog
 
