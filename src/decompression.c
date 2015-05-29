@@ -11,17 +11,17 @@
 #include "../include/decompression.h"
 	//lecture et écriture binaire
 	//lecture en mode "buffer"
-type_mot* chercher_chaine_dico(int code, type_dico* dico);
 
-void decode(FILE* E, FILE* S, type_dico* dico){
+void decode(FILE* E, FILE* S){
+	type_dico* dico;
 	int i,j; //index dans D
 	type_mot mot,mot2; // chaines d'octets
 	uint8_t a;
 	int taille_codes;
-	initialiser_dico(dico);
+	initialiser_dico(dico, DECOMP);
 
-	E = fopen("entree.txt", "r");
-	S = fopen("sortie.txt", "w");
+	//E = fopen("entree.txt", "r");
+	//S = fopen("sortie.txt", "w");
 
 	if ((E != NULL)&&(S !=NULL))					//On teste si les fichiers sont bien ouverts 
 	{

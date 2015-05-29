@@ -10,4 +10,4 @@
  * @param S fichier de sortie compresse
  * @param dictionnaire dico
  */
-void decode(FILE* E, FILE* S, type_dico* dico);
+void decode(FILE* E, FILE* S);
