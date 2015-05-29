@@ -43,32 +43,46 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 			mot_concat = mot;
 			a = fgetc(E);				//On stocke dans a le caractère courant
 			inserer_queue_mot(&mot_concat, a);	//On insère en queue de notre chaine d'octet l'octet courant
-			/*type_mot* tmp = &mot_concat;
+			type_mot* tmp = &mot_concat;
 			while(tmp != NULL)
 			{
 				printf("%d\n", tmp->lettre);
 				tmp = tmp->suivant;
 			}
-			*/
+
+			type_mot* tmp2 = &mot;
+				while(tmp2 != NULL)
+				{
+					printf("mot :%d\n", tmp2->lettre);
+					tmp2 = tmp2->suivant;
+				}
+			
 			//printf("mot_concat.lettre %d\n", mot_concat.lettre);
 			//printf("mot_concat.suivant->lettre %d\n", mot_concat.suivant->lettre);
 			code = chercher_code_dico(&mot_concat, dico);
-			//printf("Code mot_concat %d\n", code);
+			printf("Code mot_concat %d\n", code);
 			if (code >= 0)	//On stocke dans code le code du mot concatener
 			{
 				mot = mot_concat;
+				/*type_mot* tmp = &mot;
+				while(tmp != NULL)
+				{
+					printf("%d\n", tmp->lettre);
+					tmp = tmp->suivant;
+				}*/
+				
 			}
 			else 
 			{
+				
 				code_mot = chercher_code_dico(&mot, dico);
-				printf("Code_mot %d\n", code_mot);
+				printf("Emis %d\n", code_mot);
 				paquet8_ecrire(code_mot, taille_code_max, S); 	//ecrire dans le fichier le code du mot
 				inserer_dico(&mot_concat, dico, &taille_code_max, S);
 				liberer_mot(mot.suivant);
 				liberer_mot(mot_concat.suivant);
 				init_mot(&mot, a);
 				printf("mot.lettre %d\n", mot.lettre);
-				//printf("Mot.lettre: %d\n", mot.lettre);
 				//printf("Pointeur sur mot suivant : %d\n", mot.suivant);
 
 			}
