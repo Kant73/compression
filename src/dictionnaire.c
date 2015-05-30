@@ -34,7 +34,43 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 			tableau[0][i] = c;
 		}
 	}
+}
 
+void vider_dico(type_dico* dico, int* taille_code)
+{
+	if (dico == NULL) //Dico vide
+		return;
+
+	int i;
+	cpt = 259;
+	*taille_code = 9;
+
+	for (i = 0; i < 256; i++)
+	{
+		liberer_dico(dico->branches[i]->suivant);
+		dico->branches[i]->suivant = NULL;
+	}
+
+	if (mode == DECOMP)
+	{
+		liberer_tableau();
+
+		tableau[0] = calloc(4096, sizeof(type_cellule));
+	
+		int i;
+		for (i = 0; i < 256; i++)
+		{
+			type_cellule c;
+			c.indice = i;
+			c.dico_contenant = dico;
+
+			tableau[0][i] = c;
+		}
+	}
+
+	#ifdef DEBUG
+		printf("___Dictionnaire vidé___\n");
+	#endif
 }
 
 void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
@@ -65,14 +101,30 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 	if (mode == DECOMP)
 		ajouter_element(temp_mot->lettre, temp_dico);
 
-	cpt++;
-	
-	if (cpt == pow(*taille_code, 2) - 1)
-	{
-		(*taille_code) ++;
-		paquet8_ecrire(257, 9, S);
-	}
+	#ifdef DEBUG
+		printf("\tMot ajouté (code %d): ", cpt);
+		afficher_mot(mot);
+	#endif
 
+	cpt++; //On incrémente le compteur
+	
+	if (cpt == (int)(pow(2, (double)(*taille_code)) - 1))
+	{
+		if (cpt == 16384 - 1)
+		{
+			paquet8_ecrire(258, *taille_code, S);
+			vider_dico(dico, taille_code);
+		}
+		else
+		{
+			#ifdef DEBUG
+				printf("\t\tTaille des codes: %d -> %d\n", cpt, cpt+1);
+			#endif
+
+			paquet8_ecrire(257, *taille_code, S);
+			(*taille_code) ++;
+		}
+	}
 }
 
 void ajouter_element(uint8_t i, type_dico* d)
@@ -89,7 +141,7 @@ type_mot* chercher_mot_dico(int code, type_dico* dico)
 	if (dico == NULL)
 		return;
 
-	return mot_associe(tableau[code/4096][code - code/4096].dico_contenant, tableau[code/4096][code - code/4096].indice);
+	return mot_associe(tableau[code/4096][code%4096].dico_contenant, tableau[code/4096][code%4096].indice);
 }
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
@@ -161,7 +213,21 @@ void liberer_dico(type_dico* dico)
 			free(dico->branches[i]);
 		}
 	}
+	free(dico->parent);
 	free(dico);
+}
+
+void liberer_tableau()
+{
+	int i, j;
+	for (i = 0; i < 16; i++)
+	{
+		if (tableau[i] != NULL)
+		{
+			for (j = 0; j < 4096; j++)
+				free(tableau[i] + j);
+		}
+	}
 }
 
 void paquet8_ecrire(int code, int taille, FILE* S)
@@ -179,9 +245,8 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	if (taille_s > 0) //Si le buffer n'est pas vide
 	{
 		temp = (code >> (taille - 8 + taille_s)) + buffer_s;
-		
-		//Ecrire dans le fichier le mot temp
-		fprintf(S, "%c", temp);	
+		fprintf(S, "%c", temp);	//Ecrire dans le fichier le mot temp
+
 		taille = taille - 8 + taille_s;
 	}
 	
@@ -191,9 +256,7 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	while (taille >= 8)
 	{
 		temp = code >> (taille - 8);
-		
-		//Ecrire dans le fichier le mot temp
-		fprintf(S, "%c", temp);
+		fprintf(S, "%c", temp); //Ecrire dans le fichier le mot temp
 		
 		taille = taille - 8;
 	}
@@ -207,17 +270,8 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	#ifdef DEBUG
 		printf("paquet8_ecrire:\n");
 		printf("\tTaille buffer: %d\n", taille_s);
-		printf("\tBuffer: %s\n", to_binaire(buffer_s));
+		printf("\tBuffer: %s\n", to_binaire(buffer_s >> (8 - taille_s)));
 	#endif
-}
-
-
-char * to_binaire(unsigned long int arg)
-{
-    static char buffer [1+sizeof (unsigned long int)*8] = { 0 };
-    char *p=buffer-1+sizeof (unsigned long int)*8;
-    do { *--p = '0' + (arg & 1); arg >>= 1; } while (arg);
-    return p;
 }
 
 int paquet8_lire(int taille, FILE* S)
@@ -245,7 +299,9 @@ int paquet8_lire(int taille, FILE* S)
 
 	while (taille >= 8)
 	{
-		int temp2 = fgetc(S) << (taille - 8);
+
+		int temp2 = fgetc(S);
+		temp2 = temp2 << (taille - 8);
 		result += temp2;
 		
 		taille = taille - 8;
@@ -266,9 +322,23 @@ int paquet8_lire(int taille, FILE* S)
 		buffer_s &= mask;
 	}
 	
+	#ifdef DEBUG
+		printf("paquet8_lire:\n");
+		printf("\tTaille buffer: %d\n", taille_s);
+		printf("\tBuffer: %s\n", to_binaire(buffer_s));
+	#endif
+
 	return result;
 }
 
+char * to_binaire(unsigned long int arg)
+{
+	//Tiré de "developpez.net": http://www.developpez.net/forums/d7914/c-cpp/c/afficher-nombre-binaire-printf/
+    static char buffer [1+sizeof (unsigned long int)*8] = { 0 };
+    char *p=buffer-1+sizeof (unsigned long int)*8;
+    do { *--p = '0' + (arg & 1); arg >>= 1; } while (arg);
+    return p;
+}
 
 void affecter_mot(type_mot* mot1, type_mot* mot2)
 {
@@ -292,6 +362,7 @@ void affecter_mot(type_mot* mot1, type_mot* mot2)
 	{
 		temp->suivant = malloc(sizeof(type_mot));
 		temp = temp->suivant;
+		temp->suivant = NULL;
 
 		temp->lettre = mot2->lettre;
 		mot2 = mot2->suivant;
@@ -337,7 +408,7 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 	if (mot != NULL)
 	{
 		type_mot* temp_mot = mot;
-		while(temp_mot->suivant != NULL)
+		while (temp_mot->suivant != NULL)
 			temp_mot = temp_mot->suivant;
 			
 		temp_mot->suivant = malloc(sizeof(type_mot));
@@ -354,4 +425,8 @@ void init_mot(type_mot* mot, uint8_t val_init)
 		
 	mot->lettre = val_init;
 	mot->suivant = NULL;
+
+	#ifdef DEBUG
+		printf("Caractère récupéré du fichier: %c\t%s\n", val_init, to_binaire(val_init));
+	#endif
 }

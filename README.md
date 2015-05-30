@@ -3,22 +3,23 @@
 
 #TODO:
 ###Dictionnaire:
-- Vérifier fonction chercher_code_dico
-- Vérifier fonction inserer_dico
-- Faire un tableau de correspondance code/chaine pour la decompression (penser à une structure de donnée)
+- Vérifier fonctions pour la décompression
+- Commenter le code
+- Cleaner le code
 
 
 ###Compression:
-- Tester l'algo
+- Tester la compression sur des plus gros fichiers et des fichiers de type différents
 - Commenter le code
+- Cleaner le code
 
 ###Decompression:
-- Faire l'algo
+- Finir l'algo
 - Tester l'algo
 - Commenter le code
-- Fonction récupération du code dans un fichier
-- Ecriture du mot decodé dans un fichier
 
 
+###Rapport:
+- Faire le rapport ^^
 
 

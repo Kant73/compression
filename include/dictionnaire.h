@@ -48,6 +48,9 @@ int cpt; 					//Compteur des codes
 //Initialise le dictionnaire (dico doit avoir été aloué), m pour compression ou décompression
 void initialiser_dico(type_dico* dico, enum type_enum m);
 
+//Vide le dictionnaire
+void vider_dico(type_dico* dico, int* taille_code);
+
 //Insère un mot dans le dictionnaire. Génère le code associé et change la taille du code si nécessaire (ex: cpt = 511, taille_code = 9 -> taille_code = 10)
 void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S);
 
@@ -66,6 +69,8 @@ void afficher_dico(type_dico* dico);
 void liberer_mot(type_mot* mot);
 //Libérer le dictionnaire
 void liberer_dico(type_dico* dico);
+//Libérer le tableau (exculisf décompression)
+void liberer_tableau();
 
 //Ecrit dans le fichier les octets, mémorise les bits restants
 void paquet8_ecrire(int code, int taille, FILE* S);
