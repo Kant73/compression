@@ -122,9 +122,11 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 	temp_dico->branches[temp_mot->lettre] = malloc(sizeof(type_code));
 	temp_dico->branches[temp_mot->lettre]->code = cpt;
 	temp_dico->branches[temp_mot->lettre]->suivant = NULL;
-
-	if (mode == DECOMP)
+	
+	if (mode == DECOMP){
 		ajouter_element(temp_mot->lettre, temp_dico);
+	}
+
 
 	#ifdef DEBUG
 		printf("\tMot ajouté (code %d): ", cpt);
@@ -213,7 +215,7 @@ int chercher_code_dico(type_mot* mot, type_dico* dico)
 
 void afficher_dico(type_dico* dico)
 {
-	if (dico == NULL)
+	if (dico != NULL)
 	{
 		int i;
 		for (i = 0; i < 256; i++)

@@ -121,6 +121,7 @@ void decode(FILE* E, FILE* S){
 					printf("!-----------fin de boucle------------!\n");
 			}
 	}
+	afficher_dico(dico);
 }
 
 void ecrire_lettre(FILE* S, type_mot* mot){
