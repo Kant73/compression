@@ -45,7 +45,7 @@ enum type_enum mode; 		//Compression ou décompression
 int cpt; 					//Compteur des codes
 //////////////
 
-//Initialise le dictionnaire (dico doit avoir été aloué), m pour compression ou décompression
+//Initialise le dictionnaire, m pour compression ou décompression
 void initialiser_dico(type_dico* dico, enum type_enum m);
 
 //Vide le dictionnaire
@@ -62,12 +62,12 @@ int chercher_code_dico(type_mot* mot, type_dico* dico);
 //Recherche le mot associé à un code
 type_mot* chercher_mot_dico(int code, type_dico* dico);
 
-//Affiche le dictionnaire
+//Affiche le dictionnaire (récursif)
 void afficher_dico(type_dico* dico);
 
 //Libérer un mot
 void liberer_mot(type_mot* mot);
-//Libérer le dictionnaire
+//Libérer le dictionnaire (récursif)
 void liberer_dico(type_dico* dico);
 //Libérer le tableau (exculisf décompression)
 void liberer_tableau();
