@@ -27,7 +27,7 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 
 	if (mode == DECOMP)
 	{
-		tableau[0] = calloc(4096, sizeof(type_cellule));
+		tableau[0] = calloc(1024, sizeof(type_cellule));
 	
 		int i;
 		for (i = 0; i < 256; i++)
@@ -65,7 +65,7 @@ void vider_dico(type_dico* dico, int* taille_code)
 	{
 		liberer_tableau();
 
-		tableau[0] = calloc(4096, sizeof(type_cellule));
+		tableau[0] = calloc(1024, sizeof(type_cellule));
 	
 		int i;
 		for (i = 0; i < 256; i++)
@@ -166,7 +166,7 @@ void ajouter_element(uint8_t i, type_dico* d)
 	c.indice = i;
 	c.dico_contenant = d;
 
-	tableau[cpt/4096][cpt - cpt/4096] = c;
+	tableau[cpt/1024][cpt%1024] = c;
 }
 
 type_mot* chercher_mot_dico(int code, type_dico* dico)
@@ -174,7 +174,7 @@ type_mot* chercher_mot_dico(int code, type_dico* dico)
 	if (dico == NULL)
 		return;
 
-	return mot_associe(tableau[code/4096][code%4096].dico_contenant, tableau[code/4096][code%4096].indice);
+	return mot_associe(tableau[code/1024][code%1024].dico_contenant, tableau[code/1024][code%1024].indice);
 }
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
@@ -275,7 +275,7 @@ void liberer_tableau()
 	{
 		if (tableau[i] != NULL)
 		{
-			for (j = 0; j < 4096; j++)
+			for (j = 0; j < 1024; j++)
 				free(tableau[i] + j);
 		}
 	}
