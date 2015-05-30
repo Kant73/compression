@@ -3,9 +3,14 @@
 
 void initialiser_dico(type_dico* dico, enum type_enum m)
 {
-	if (dico == NULL) //Dico vide
-		return;
-	
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico == NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans initialiser_dico() ...\n");
+			return;
+		}
+	#endif
+
 	mode = m;
 	cpt = 259;
 
@@ -38,8 +43,13 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 
 void vider_dico(type_dico* dico, int* taille_code)
 {
-	if (dico == NULL) //Dico vide
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico == NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans vider_dico() ...\n");
+			return;
+		}
+	#endif
 
 	int i;
 	cpt = 259;
@@ -75,8 +85,23 @@ void vider_dico(type_dico* dico, int* taille_code)
 
 void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 {
-	if (dico == NULL || mot == NULL || mot->suivant == NULL) //Dico ou mot vide
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico == NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans inserer_dico() ...\n");
+			return;
+		}
+		if (mot == NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans inserer_dico() ...\n");
+			return;
+		}
+		if (mot->suivant == NULL)
+		{
+			printf("XXX_BUG_XXX: mot possède qu'une seule lettre, pas besoin d'insérer ...\n");
+			return;
+		}
+	#endif
 
 	type_dico* temp_dico = dico;
 	type_mot* temp_mot = mot;
@@ -129,6 +154,14 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 
 void ajouter_element(uint8_t i, type_dico* d)
 {
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (d == NULL)
+		{
+			printf("XXX_BUG_XXX: d == NULL dans ajouter_element(), référence vers un dictionnaire indéfinie ...\n");
+			return;
+		}
+	#endif
+
 	type_cellule c;
 	c.indice = i;
 	c.dico_contenant = d;
@@ -146,8 +179,18 @@ type_mot* chercher_mot_dico(int code, type_dico* dico)
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
 {
-	if (dico == NULL || mot == NULL) //Dico ou mot vide
-		return -1;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico == NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans chercher_code_dico() ...\n");
+			return -1;
+		}
+		if (mot == NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans chercher_code_dico() ...\n");
+			return -1;
+		}
+	#endif
 		
 	type_mot* temp_mot = mot;
 	type_dico* temp_dico = dico;
@@ -170,7 +213,7 @@ int chercher_code_dico(type_mot* mot, type_dico* dico)
 
 void afficher_dico(type_dico* dico)
 {
-	if (dico != NULL)
+	if (dico == NULL)
 	{
 		int i;
 		for (i = 0; i < 256; i++)
@@ -190,6 +233,14 @@ void afficher_dico(type_dico* dico)
 
 void liberer_mot(type_mot* mot)
 {
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (mot == NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans liberer_mot() ...\n");
+			return;
+		}
+	#endif
+
 	type_mot* temp_mot = mot;
 	while (temp_mot != NULL)
 	{
@@ -232,8 +283,13 @@ void liberer_tableau()
 
 void paquet8_ecrire(int code, int taille, FILE* S)
 {
-	if (taille <= 0) //Taille invalide
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (taille <= 8)
+		{
+			printf("XXX_BUG_XXX: taille == %d dans paquet8_ecrire() ...\n", taille);
+			return;
+		}
+	#endif
 
 	//Initialisation des statics
 	static uint8_t buffer_s = 0;
@@ -276,8 +332,13 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 
 int paquet8_lire(int taille, FILE* S)
 {
-	if (taille <= 0)
-		return -1;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (taille <= 8)
+		{
+			printf("XXX_BUG_XXX: taille == %d dans paquet8_lire() ...\n", taille);
+			return -1;
+		}
+	#endif
 		
 	static uint8_t buffer_s = 0;
 	static int taille_s = 0;
@@ -342,8 +403,18 @@ char * to_binaire(unsigned long int arg)
 
 void affecter_mot(type_mot* mot1, type_mot* mot2)
 {
-	if (mot1 == NULL || mot2 == NULL)
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (mot1 = NULL)
+		{
+			printf("XXX_BUG_XXX: mot1 == NULL dans affecter_mot() ...\n");
+			return;
+		}
+		if (mot2 = NULL)
+		{
+			printf("XXX_BUG_XXX: mot2 == NULL dans affecter_mot() ...\n");
+			return;
+		}
+	#endif
 
 	type_mot* temp = mot1->suivant;
 	while (temp != NULL)
@@ -371,19 +442,32 @@ void affecter_mot(type_mot* mot1, type_mot* mot2)
 
 void afficher_mot(type_mot* mot)
 {
-	while (mot != NULL)
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (mot = NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans afficher_mot() ...\n");
+			return;
+		}
+	#endif
+
+	do
 	{
 		printf("%c", mot->lettre);
 		mot = mot->suivant;
-	}
+	} while (mot != NULL);
+
 	printf("\n");
 }
 
-
 type_mot* mot_associe(type_dico* dico, uint8_t indice)
 {
-	if (dico == NULL)
-		return NULL;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico = NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans mot_associe() ...\n");
+			return;
+		}
+	#endif
 		
 	type_mot* liste = malloc(sizeof(type_mot));
 	type_mot* temp = liste;
@@ -405,23 +489,32 @@ type_mot* mot_associe(type_dico* dico, uint8_t indice)
 
 void inserer_queue_mot(type_mot* mot, uint8_t elem)
 {
-	if (mot != NULL)
-	{
-		type_mot* temp_mot = mot;
-		while (temp_mot->suivant != NULL)
-			temp_mot = temp_mot->suivant;
-			
-		temp_mot->suivant = malloc(sizeof(type_mot));
-		temp_mot->suivant->lettre = elem;
-		temp_mot->suivant->suivant = NULL;
-	}
-}
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (mot = NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans inserer_queue_mot() ...\n");
+			return;
+		}
+	#endif
 
+	type_mot* temp_mot = mot;
+	while (temp_mot->suivant != NULL)
+		temp_mot = temp_mot->suivant;
+		
+	temp_mot->suivant = malloc(sizeof(type_mot));
+	temp_mot->suivant->lettre = elem;
+	temp_mot->suivant->suivant = NULL;
+}
 
 void init_mot(type_mot* mot, uint8_t val_init)
 {
-	if (mot == NULL)
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (mot = NULL)
+		{
+			printf("XXX_BUG_XXX: mot == NULL dans init_mot() ...\n");
+			return;
+		}
+	#endif
 		
 	mot->lettre = val_init;
 	mot->suivant = NULL;
