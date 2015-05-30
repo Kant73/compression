@@ -60,8 +60,10 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 				if (mot.suivant != NULL)
 					liberer_mot(mot.suivant);
 				if (mot_concat.suivant != NULL)
-					liberer_mot(mot_concat.suivant); 
-				mot_concat.suivant = NULL;
+				{
+					liberer_mot(mot_concat.suivant);
+					mot_concat.suivant = NULL; 
+				}
 				init_mot(&mot, a);
 			}
 		}
