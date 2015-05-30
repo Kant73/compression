@@ -284,7 +284,7 @@ void liberer_tableau()
 void paquet8_ecrire(int code, int taille, FILE* S)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (taille <= 8)
+		if (taille < 7)
 		{
 			printf("XXX_BUG_XXX: taille == %d dans paquet8_ecrire() ...\n", taille);
 			return;
@@ -404,12 +404,12 @@ char * to_binaire(unsigned long int arg)
 void affecter_mot(type_mot* mot1, type_mot* mot2)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (mot1 = NULL)
+		if (mot1 == NULL)
 		{
 			printf("XXX_BUG_XXX: mot1 == NULL dans affecter_mot() ...\n");
 			return;
 		}
-		if (mot2 = NULL)
+		if (mot2 == NULL)
 		{
 			printf("XXX_BUG_XXX: mot2 == NULL dans affecter_mot() ...\n");
 			return;
@@ -443,7 +443,7 @@ void affecter_mot(type_mot* mot1, type_mot* mot2)
 void afficher_mot(type_mot* mot)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (mot = NULL)
+		if (mot == NULL)
 		{
 			printf("XXX_BUG_XXX: mot == NULL dans afficher_mot() ...\n");
 			return;
@@ -462,7 +462,7 @@ void afficher_mot(type_mot* mot)
 type_mot* mot_associe(type_dico* dico, uint8_t indice)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (dico = NULL)
+		if (dico == NULL)
 		{
 			printf("XXX_BUG_XXX: dico == NULL dans mot_associe() ...\n");
 			return;
@@ -490,7 +490,7 @@ type_mot* mot_associe(type_dico* dico, uint8_t indice)
 void inserer_queue_mot(type_mot* mot, uint8_t elem)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (mot = NULL)
+		if (mot == NULL)
 		{
 			printf("XXX_BUG_XXX: mot == NULL dans inserer_queue_mot() ...\n");
 			return;
@@ -509,7 +509,7 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 void init_mot(type_mot* mot, uint8_t val_init)
 {
 	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (mot = NULL)
+		if (mot == NULL)
 		{
 			printf("XXX_BUG_XXX: mot == NULL dans init_mot() ...\n");
 			return;

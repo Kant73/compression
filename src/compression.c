@@ -28,10 +28,14 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 	//A modifier : on ouvrira les fichier dans le main
 	E = fopen("entree.txt", "r");
 	S = fopen("sortie.txt", "w");
+	
+	if (E == NULL)
+		printf("Impossible d'ouvir le fichier...\n");
 
 	init_mot(&mot, fgetc(E));	//On initialise le mot avec le premier octet de E
 										//Correspond à w <- [1er octet de E]
-	
+	printf("lol\n");
+
 	if (E != NULL)						//On teste si E n'est pas null ce qui signifierai 
 	{									//que le fichier n'est pas ouvert
 		while(!feof(E))					//Tant qu'on atteint pas la fin de fichier
@@ -54,8 +58,11 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 				paquet8_ecrire(code_mot, taille_code_max, S); 	//ecrire dans le fichier le code du mot
 				inserer_dico(&mot_concat, dico, &taille_code_max, S);
 				
-				liberer_mot(mot.suivant);
-				liberer_mot(mot_concat.suivant); mot_concat.suivant = NULL;
+				if (mot.suivant != NULL)
+					liberer_mot(mot.suivant);
+				if (mot_concat.suivant != NULL)
+					liberer_mot(mot_concat.suivant); 
+				mot_concat.suivant = NULL;
 				init_mot(&mot, a);
 			}
 		}
