@@ -34,7 +34,6 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 
 	init_mot(&mot, fgetc(E));	//On initialise le mot avec le premier octet de E
 										//Correspond à w <- [1er octet de E]
-	printf("lol\n");
 
 	if (E != NULL)						//On teste si E n'est pas null ce qui signifierai 
 	{									//que le fichier n'est pas ouvert
