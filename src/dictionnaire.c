@@ -351,8 +351,8 @@ int paquet8_lire(int taille, FILE* S)
 		int temp = buffer_s;
 		temp = temp << (taille - taille_s);
 		result += temp;
-		
-		taille -= taille_s;
+
+		taille = taille - taille_s;
 	}
 	
 	taille_s = 0;
@@ -360,9 +360,8 @@ int paquet8_lire(int taille, FILE* S)
 
 	while (taille >= 8)
 	{
-
 		int temp2 = fgetc(S);
-		temp2 = temp2 << (taille - 8);
+		temp2 = temp2 << taille - 8;
 		result += temp2;
 		
 		taille = taille - 8;
