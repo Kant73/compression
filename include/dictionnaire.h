@@ -65,6 +65,9 @@ type_mot* chercher_mot_dico(int code, type_dico* dico);
 //Affiche le dictionnaire (récursif)
 void afficher_dico(type_dico* dico);
 
+//Affiche le tabeau
+void afficher_tableau();
+
 //Libérer un mot
 void liberer_mot(type_mot* mot);
 //Libérer le dictionnaire (récursif)

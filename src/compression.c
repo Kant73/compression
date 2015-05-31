@@ -26,7 +26,7 @@ void encode(FILE* E, FILE* S, type_dico* dico)
 	initialiser_dico(dico, COMP); //initialisation du Dico (paramètre COMP pour la compression)
 
 	//A modifier eventuellement : on ouvrira les fichiers dans le main
-	E = fopen("entree.txt", "r");
+	E = fopen("example_image.png", "r");
 	S = fopen("sortie.txt", "w");
 	
 	if (E == NULL)

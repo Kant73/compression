@@ -123,10 +123,8 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 	temp_dico->branches[temp_mot->lettre]->code = cpt;
 	temp_dico->branches[temp_mot->lettre]->suivant = NULL;
 	
-	if (mode == DECOMP){
+	if (mode == DECOMP)
 		ajouter_element(temp_mot->lettre, temp_dico);
-	}
-
 
 	#ifdef DEBUG
 		printf("\tMot ajouté (code %d): ", cpt);
@@ -135,7 +133,12 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 
 	cpt++; //On incrémente le compteur
 	
-	if (cpt == (int)(pow(2, (double)(*taille_code)) - 1))
+	if (mode == DECOMP)
+	{
+		if (cpt % 1024 == 1024 - 1)
+			tableau[cpt/1024 + 1] = calloc(1024, sizeof(type_cellule));
+	}
+	else if (cpt == (int)(pow(2, (double)(*taille_code)) - 1))
 	{
 		if (cpt == 16384 - 1)
 		{
@@ -173,10 +176,41 @@ void ajouter_element(uint8_t i, type_dico* d)
 
 type_mot* chercher_mot_dico(int code, type_dico* dico)
 {
-	if (dico == NULL)
-		return;
+	#ifdef DEBUG //Mauvaise utilisation de la fonction
+		if (dico == NULL)
+		{
+			printf("XXX_BUG_XXX: dico == NULL dans chercher_mot_dico() ...\n");
+			return NULL;
+		}
+	#endif
 
-	return mot_associe(tableau[code/1024][code%1024].dico_contenant, tableau[code/1024][code%1024].indice);
+	if (&tableau[code/1024][code%1024] != NULL)
+		return mot_associe(tableau[code/1024][code%1024].dico_contenant, tableau[code/1024][code%1024].indice);
+	else
+		return NULL;
+}
+
+type_mot* mot_associe(type_dico* dico, uint8_t indice)
+{
+	if (dico == NULL)
+		return NULL;
+		
+	type_mot* liste = malloc(sizeof(type_mot));
+	liste->lettre = indice;
+	liste->suivant = NULL;
+
+	while (dico->parent->dico_contenant != NULL)
+	{
+		type_mot* temp = liste;
+		liste = malloc(sizeof(type_mot));
+		liste->suivant = temp;
+		
+		liste->lettre = dico->parent->indice;
+
+		dico = dico->parent->dico_contenant;
+	}
+
+	return liste;
 }
 
 int chercher_code_dico(type_mot* mot, type_dico* dico)
@@ -217,6 +251,8 @@ void afficher_dico(type_dico* dico)
 {
 	if (dico != NULL)
 	{
+		printf("Adresse %x\n", dico);
+		printf("Adresse parent %x, indice %d\n", dico->parent->dico_contenant, dico->parent->indice);
 		int i;
 		for (i = 0; i < 256; i++)
 		{
@@ -272,15 +308,25 @@ void liberer_dico(type_dico* dico)
 
 void liberer_tableau()
 {
-	int i, j;
+	int i;
 	for (i = 0; i < 16; i++)
-	{
 		if (tableau[i] != NULL)
 		{
-			for (j = 0; j < 1024; j++)
-				free(tableau[i] + j);
+			free(tableau[i]);
+			tableau[i] = NULL;
 		}
-	}
+
+	#ifdef DEBUG
+		afficher_tableau();
+	#endif
+}
+
+void afficher_tableau()
+{
+	int i, j;
+	for (i = 0; i < 16; i++)
+		for (j = 0; j < 1024; j++)
+			printf("%x\n", &tableau[i][j]);
 }
 
 void paquet8_ecrire(int code, int taille, FILE* S)
@@ -323,6 +369,10 @@ void paquet8_ecrire(int code, int taille, FILE* S)
 	{
 		taille_s = taille;
 		buffer_s = code << (8 - taille_s);
+
+		uint8_t masque = -1;
+		masque = masque << (8-taille_s);
+		buffer_s = buffer_s & masque;
 	}
 
 	#ifdef DEBUG
@@ -453,39 +503,11 @@ void afficher_mot(type_mot* mot)
 
 	do
 	{
-		printf("%c", mot->lettre);
+		printf("%d ", mot->lettre);
 		mot = mot->suivant;
 	} while (mot != NULL);
 
 	printf("\n");
-}
-
-type_mot* mot_associe(type_dico* dico, uint8_t indice)
-{
-	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (dico == NULL)
-		{
-			printf("XXX_BUG_XXX: dico == NULL dans mot_associe() ...\n");
-			return;
-		}
-	#endif
-		
-	type_mot* liste = malloc(sizeof(type_mot));
-	type_mot* temp = liste;
-	
-	temp->lettre = dico->branches[indice]->code;
-	while (dico->parent->dico_contenant != NULL)
-	{
-		temp->suivant = malloc(sizeof(type_mot));
-		temp = temp->suivant;
-		temp->suivant = NULL;
-		
-		dico = dico->parent->dico_contenant;
-		
-		temp->lettre = dico->branches[indice]->code;
-	}
-	
-	return liste;
 }
 
 void inserer_queue_mot(type_mot* mot, uint8_t elem)
