@@ -68,8 +68,19 @@ Par exemple : `./LZW -c image.bmp image_compressée`
 
 #Exemple d'exécution
 ##Compression
+```
+quentin@quentin-S301LA:~/Documents/polytech/cps/compression/src$ ./LZW -c long_text.txt sortie.txt
+Terminé
+Taille du fichier:		7513509
+Taille du fichier compressé:	2669773
+Taux de compression:	64.467026 %
+```
 
 ##Décompression
+```
+quentin@quentin-S301LA:~/Documents/polytech/cps/compression/src$ ./LZW -d sortie.txt decomp.txt
+Terminé
+```
 
 #Extensions
 ##Lecture/écriture binaire des codes
