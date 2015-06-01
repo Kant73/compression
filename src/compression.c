@@ -24,11 +24,17 @@ void encode(FILE* E, FILE* S)
 
 	int taille_code_max = 9;
 	
-	dico = calloc(1, sizeof(type_dico));
-	initialiser_dico(dico, COMP); //initialisation du Dico (paramètre COMP pour la compression)
-
 	mot.lettre = fgetc(E); //On initialise le mot avec le premier octet de E
 	mot.suivant = NULL;		//Correspond à w <- [1er octet de E]
+	
+	if (feof(E))
+	{	
+		printf("Fichier vide...\n");
+		return;
+	}
+	
+	dico = calloc(1, sizeof(type_dico));
+	initialiser_dico(dico, COMP); //initialisation du Dico (paramètre COMP pour la compression)
 
 	#ifdef DEBUG
 		printf("Caractère récupéré du fichier: %c\t%s\n", mot.lettre, to_binaire(mot.lettre));
