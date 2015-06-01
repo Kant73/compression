@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 		printf("<DEBUG MODE ENABLED>\n");
 	#endif
 	
-	if (argc != 5)
+	if (argc != 4)
 	{
 		printf("\nPour compresser:\t./LZW -c <fichier_a_compresser> <fichier_compressé>\n");
 		printf("Pour décompresser:\t./LZW -d <fichier_a_décompresser> <fichier_décompressé>\n\n");
