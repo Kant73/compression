@@ -16,6 +16,7 @@ void decode(FILE* E, FILE* S)
 	int i,j; //index dans D (code du mot)
 	type_mot mot,mot2; // chaines d'octets
 	uint8_t a;
+	type_mot* temp;
 	int taille_code_max = 9;
 
 	//On initialise notre dictionnaire de décompression
@@ -23,7 +24,10 @@ void decode(FILE* E, FILE* S)
 	initialiser_dico(dico, DECOMP);
 
 	i = paquet8_lire(taille_code_max, E); //on récupère le premier code du fichier d'entrée
-	a = chercher_mot_dico(i, dico)->lettre; 
+
+	temp = chercher_mot_dico(i, dico);
+	a = temp->lettre; 
+	free(temp);
 
 	mot.lettre = a;
 	mot.suivant = NULL;
@@ -48,7 +52,9 @@ void decode(FILE* E, FILE* S)
 			if (i == 256)
 				break;
 
-			a = chercher_mot_dico(i, dico)->lettre; 
+			temp = chercher_mot_dico(i, dico);
+			a = temp->lettre; 
+			free(temp);
 
 			mot.lettre = a;
 			mot.suivant = NULL;
@@ -59,15 +65,21 @@ void decode(FILE* E, FILE* S)
 		}
 		else
 		{
-
-			if (chercher_mot_dico(j, dico) == NULL) //Si le mot n'est pas présent dans le dico
+			temp = chercher_mot_dico(j, dico);
+			if (temp == NULL) //Si le mot n'est pas présent dans le dico
 			{	
-				affecter_mot(&mot2, chercher_mot_dico(i, dico));	
+				temp = chercher_mot_dico(i, dico);
+				affecter_mot(&mot2, temp);	
+				free(temp);
+
 				inserer_queue_mot(&mot2, a);
 			}
 			else
-				affecter_mot(&mot2, chercher_mot_dico(j, dico));
-			
+			{
+				affecter_mot(&mot2, temp);
+				free(temp);
+			}
+
 			ecrire_lettre(S, &mot2);
 			a = mot2.lettre;
 
@@ -75,7 +87,9 @@ void decode(FILE* E, FILE* S)
 			inserer_dico(&mot, dico, &taille_code_max, S);
 
 			i=j;
-			affecter_mot(&mot, chercher_mot_dico(i, dico));
+			temp = chercher_mot_dico(i, dico);
+			affecter_mot(&mot, temp);
+			free(temp);
 		}
 	}
 

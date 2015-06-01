@@ -45,11 +45,19 @@ int main(int argc, char* argv[])
 
 		return;
 	}
+	printf("Terminé\n\n");
+
+	fseek(fileE, 0L, SEEK_END);
+	fseek(fileS, 0L, SEEK_END);
+
+	printf("Taille du fichier:\t\t%d\n", ftell(fileE));
+	printf("Taille du fichier compressé:\t%d\n", ftell(fileS));
+	printf("Taux de compression:\t%f \%\n", (1.f - (float)(ftell(fileS))/ftell(fileE))*100.f);
 
 	fclose(fileE);
 	fclose(fileS);
 	
-	printf("Terminé\n");
+	
 	
 	return 0;
 }
