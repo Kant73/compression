@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define _TAILLE_ 1024
+
 typedef struct type_dico type_dico;
 typedef struct type_code type_code;
 typedef struct type_mot type_mot;
@@ -83,8 +85,8 @@ int paquet8_lire(int taille, FILE* S);
 //Remonte le dictionnaire pour chercher le mot associé
 type_mot* mot_associe(type_dico* dico, uint8_t indice);
 
+//Concatène un élément à un mot
 void inserer_queue_mot(type_mot* mot, uint8_t elem);
-void init_mot(type_mot* mot, uint8_t val_init);
 
 //Permet de printf en binaire (%s)
 char* to_binaire(unsigned long int arg);

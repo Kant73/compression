@@ -1,4 +1,4 @@
-#include "../include/dictionnaire.h"
+#include "dictionnaire.h"
 #include <math.h>
 
 void initialiser_dico(type_dico* dico, enum type_enum m)
@@ -15,7 +15,7 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 	cpt = 259;
 
 	int i;
-	for (i = 0; i < 256; i++)
+	for (i = 0; i < 256; i++) //Initialiser le dictionnaire
 	{
 		dico->branches[i] = malloc(sizeof(type_code));
 		dico->branches[i]->code = i;
@@ -23,13 +23,15 @@ void initialiser_dico(type_dico* dico, enum type_enum m)
 	}
 
 	dico->parent = malloc(sizeof(type_cellule));
-	dico->parent->dico_contenant = NULL;
+	dico->parent->dico_contenant = NULL; //Pas de parent
 
-	if (mode == DECOMP)
+	if (mode == DECOMP) //Décompression
 	{
-		tableau[0] = calloc(1024, sizeof(type_cellule));
-	
+		tableau[0] = malloc(sizeof(type_cellule)*_TAILLE_); //Initialisation du tableau
 		int i;
+		for (i=256; i < _TAILLE_; i++)
+			tableau[0][i].dico_contenant = NULL;
+	
 		for (i = 0; i < 256; i++)
 		{
 			type_cellule c;
@@ -55,7 +57,7 @@ void vider_dico(type_dico* dico, int* taille_code)
 	cpt = 259;
 	*taille_code = 9;
 
-	for (i = 0; i < 256; i++)
+	for (i = 0; i < 256; i++) //Vider le dictionnaire, sauf les monomes
 	{
 		liberer_dico(dico->branches[i]->suivant);
 		dico->branches[i]->suivant = NULL;
@@ -63,11 +65,13 @@ void vider_dico(type_dico* dico, int* taille_code)
 
 	if (mode == DECOMP)
 	{
-		liberer_tableau();
+		liberer_tableau(); //Vider la table
 
-		tableau[0] = calloc(1024, sizeof(type_cellule));
-	
+		tableau[0] = malloc(sizeof(type_cellule)*_TAILLE_);
 		int i;
+		for (i=256; i < _TAILLE_; i++)
+			tableau[0][i].dico_contenant = NULL;
+
 		for (i = 0; i < 256; i++)
 		{
 			type_cellule c;
@@ -106,53 +110,51 @@ void inserer_dico(type_mot* mot, type_dico* dico, int* taille_code, FILE* S)
 	type_dico* temp_dico = dico;
 	type_mot* temp_mot = mot;
 	
-	while (temp_mot->suivant != NULL)
+	while (temp_mot->suivant != NULL) //Parcourir le mot et le dictionnaire
 	{
-		if (temp_dico->branches[temp_mot->lettre]->suivant == NULL)
+		if (temp_dico->branches[temp_mot->lettre]->suivant == NULL) //Créer un dictionnaire supplémentaire
 		{
 			temp_dico->branches[temp_mot->lettre]->suivant = calloc(1, sizeof(type_dico));
 			temp_dico->branches[temp_mot->lettre]->suivant->parent = malloc(sizeof(type_cellule));
 			temp_dico->branches[temp_mot->lettre]->suivant->parent->dico_contenant = temp_dico;
 			temp_dico->branches[temp_mot->lettre]->suivant->parent->indice = temp_mot->lettre;
 		}
-		temp_dico = temp_dico->branches[temp_mot->lettre]->suivant;
+		temp_dico = temp_dico->branches[temp_mot->lettre]->suivant; //Ajouter la lettre
 		temp_mot = temp_mot->suivant;
 	}
 
 	temp_dico->branches[temp_mot->lettre] = malloc(sizeof(type_code));
 	temp_dico->branches[temp_mot->lettre]->code = cpt;
 	temp_dico->branches[temp_mot->lettre]->suivant = NULL;
-	
-	if (mode == DECOMP)
-		ajouter_element(temp_mot->lettre, temp_dico);
 
 	#ifdef DEBUG
 		printf("\tMot ajouté (code %d): ", cpt);
 		afficher_mot(mot);
 	#endif
 
+	if (mode == DECOMP)
+		ajouter_element(temp_mot->lettre, temp_dico);
+
 	cpt++; //On incrémente le compteur
 	
-	if (mode == DECOMP)
+	if (mode == COMP)
 	{
-		if (cpt % 1024 == 1024 - 1)
-			tableau[cpt/1024 + 1] = calloc(1024, sizeof(type_cellule));
-	}
-	else if (cpt == (int)(pow(2, (double)(*taille_code)) - 1))
-	{
-		if (cpt == 16384 - 1)
+		if (cpt == (int)(pow(2, (double)(*taille_code)) - 1))
 		{
-			paquet8_ecrire(258, *taille_code, S);
-			vider_dico(dico, taille_code);
-		}
-		else
-		{
-			#ifdef DEBUG
-				printf("\t\tTaille des codes: %d -> %d\n", cpt, cpt+1);
-			#endif
+			if (cpt == _TAILLE_ * 16 - 1)
+			{
+				paquet8_ecrire(258, *taille_code, S);
+				vider_dico(dico, taille_code);
+			}
+			else
+			{
+				#ifdef DEBUG
+					printf("\t\tTaille des codes: %d -> %d\n", cpt, cpt+1);
+				#endif
 
-			paquet8_ecrire(257, *taille_code, S);
-			(*taille_code) ++;
+				paquet8_ecrire(257, *taille_code, S);
+				(*taille_code) ++;
+			}
 		}
 	}
 }
@@ -171,7 +173,15 @@ void ajouter_element(uint8_t i, type_dico* d)
 	c.indice = i;
 	c.dico_contenant = d;
 
-	tableau[cpt/1024][cpt%1024] = c;
+	if (tableau[cpt/_TAILLE_] == NULL) //Ajouter un nouveau tableau
+	{
+		tableau[cpt/_TAILLE_] = malloc(sizeof(type_cellule)*_TAILLE_);
+		int i;
+		for (i=0; i < _TAILLE_; i++)
+			tableau[cpt/_TAILLE_][i].dico_contenant = NULL;
+	}
+		
+	tableau[cpt/_TAILLE_][cpt%_TAILLE_] = c;
 }
 
 type_mot* chercher_mot_dico(int code, type_dico* dico)
@@ -184,8 +194,8 @@ type_mot* chercher_mot_dico(int code, type_dico* dico)
 		}
 	#endif
 
-	if (&tableau[code/1024][code%1024] != NULL)
-		return mot_associe(tableau[code/1024][code%1024].dico_contenant, tableau[code/1024][code%1024].indice);
+	if (tableau[code/_TAILLE_] != NULL)
+		return mot_associe(tableau[code/_TAILLE_][code%_TAILLE_].dico_contenant, tableau[code/_TAILLE_][code%_TAILLE_].indice);
 	else
 		return NULL;
 }
@@ -199,7 +209,7 @@ type_mot* mot_associe(type_dico* dico, uint8_t indice)
 	liste->lettre = indice;
 	liste->suivant = NULL;
 
-	while (dico->parent->dico_contenant != NULL)
+	while (dico->parent->dico_contenant != NULL) //Remonter le dictionnaire pour trouver le mot
 	{
 		type_mot* temp = liste;
 		liste = malloc(sizeof(type_mot));
@@ -230,7 +240,7 @@ int chercher_code_dico(type_mot* mot, type_dico* dico)
 		
 	type_mot* temp_mot = mot;
 	type_dico* temp_dico = dico;
-	while (1)
+	while (1) //Parcourir le dictionnaire
 	{
 		if (temp_dico != NULL && temp_dico->branches[temp_mot->lettre] != NULL)
 		{
@@ -299,16 +309,21 @@ void liberer_dico(type_dico* dico)
 		if (dico->branches[i] != NULL)
 		{
 			liberer_dico(dico->branches[i]->suivant);
+			dico->branches[i]->suivant = NULL;
 			free(dico->branches[i]);
+			dico->branches[i] = NULL;
 		}
 	}
+	dico->parent->dico_contenant = NULL;
 	free(dico->parent);
+	dico->parent = NULL;
 	free(dico);
+	dico = NULL;
 }
 
 void liberer_tableau()
 {
-	int i;
+	int i, j;
 	for (i = 0; i < 16; i++)
 		if (tableau[i] != NULL)
 		{
@@ -325,8 +340,7 @@ void afficher_tableau()
 {
 	int i, j;
 	for (i = 0; i < 16; i++)
-		for (j = 0; j < 1024; j++)
-			printf("%x\n", &tableau[i][j]);
+			printf("%x\n", tableau[i]);
 }
 
 void paquet8_ecrire(int code, int taille, FILE* S)
@@ -527,22 +541,4 @@ void inserer_queue_mot(type_mot* mot, uint8_t elem)
 	temp_mot->suivant = malloc(sizeof(type_mot));
 	temp_mot->suivant->lettre = elem;
 	temp_mot->suivant->suivant = NULL;
-}
-
-void init_mot(type_mot* mot, uint8_t val_init)
-{
-	#ifdef DEBUG //Mauvaise utilisation de la fonction
-		if (mot == NULL)
-		{
-			printf("XXX_BUG_XXX: mot == NULL dans init_mot() ...\n");
-			return;
-		}
-	#endif
-		
-	mot->lettre = val_init;
-	mot->suivant = NULL;
-
-	#ifdef DEBUG
-		printf("Caractère récupéré du fichier: %c\t%s\n", val_init, to_binaire(val_init));
-	#endif
 }

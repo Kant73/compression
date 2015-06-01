@@ -9,66 +9,82 @@
 
 #include "dictionnaire.h"
 #include "decompression.h"
-	//lecture et écriture binaire
-	//lecture en mode "buffer"
 
-
-void decode(FILE* E, FILE* S){
-
+void decode(FILE* E, FILE* S)
+{
 	type_dico* dico;
 	int i,j; //index dans D (code du mot)
 	type_mot mot,mot2; // chaines d'octets
 	uint8_t a;
-	int taille_codes=9;
+	int taille_code_max = 9;
 
 	//On initialise notre dictionnaire de décompression
 	dico = calloc(1, sizeof(type_dico));
 	initialiser_dico(dico, DECOMP);
 
-	//E = fopen("entree.txt", "r");
-	//S = fopen("sortie.txt", "w");
+	i = paquet8_lire(taille_code_max, E); //on récupère le premier code du fichier d'entrée
+	a = chercher_mot_dico(i, dico)->lettre; 
 
-	if ((E != NULL)&&(S !=NULL))	//On teste si les fichiers sont bien ouverts 
+	mot.lettre = a;
+	mot.suivant = NULL;
+
+	mot2.suivant = NULL;
+
+	ecrire_lettre(S, &mot); 			
+
+	while (!feof(E)) //Tant qu'on atteint pas la fin de fichier
 	{
-		i = paquet8_lire(taille_codes, E); //on récupère le premier code du fichier d'entrée
-		a = chercher_mot_dico(i, dico)->lettre; 
-
-		init_mot(&mot, a);
-		init_mot(&mot2, a); 
-
-		ecrire_lettre(S, &mot); 			
-
-		while (!feof(E)) //Tant qu'on atteint pas la fin de fichier
+		j = paquet8_lire(taille_code_max, E);
+		if (j == 256)
+			break; //Fin de fichier
+		else if (j == 257)
+			taille_code_max ++;
+		else if (j == 258) //Réinitialisation
 		{
-			j = paquet8_lire(taille_codes, E);
-			if (j == 256)
-				break; //Fin de fichier
-			else if (j == 257)
-				taille_codes ++;
-			else if (j == 258)
-				vider_dico(dico, &taille_codes);
-			else
-			{
+			vider_dico(dico, &taille_code_max);
+			
+			i = paquet8_lire(taille_code_max, E); //on récupère le premier code du fichier d'entrée
 
-				if (chercher_mot_dico(j, dico) == NULL) //Si le mot n'est pas présent dans le dico
-				{	
-					affecter_mot(&mot2, chercher_mot_dico(i, dico));	
-					inserer_queue_mot(&mot2, a);
-				}
-				else
-					affecter_mot(&mot2, chercher_mot_dico(j, dico));
-				
-				ecrire_lettre(S, &mot2);
-				a = mot2.lettre;
+			if (i == 256)
+				break;
 
-				inserer_queue_mot(&mot, a);
-				inserer_dico(&mot, dico, &taille_codes, S);
+			a = chercher_mot_dico(i, dico)->lettre; 
 
-				i=j;
-				affecter_mot(&mot, chercher_mot_dico(i, dico));
+			mot.lettre = a;
+			mot.suivant = NULL;
+
+			mot2.suivant = NULL;
+
+			ecrire_lettre(S, &mot); 
+		}
+		else
+		{
+
+			if (chercher_mot_dico(j, dico) == NULL) //Si le mot n'est pas présent dans le dico
+			{	
+				affecter_mot(&mot2, chercher_mot_dico(i, dico));	
+				inserer_queue_mot(&mot2, a);
 			}
+			else
+				affecter_mot(&mot2, chercher_mot_dico(j, dico));
+			
+			ecrire_lettre(S, &mot2);
+			a = mot2.lettre;
+
+			inserer_queue_mot(&mot, a);
+			inserer_dico(&mot, dico, &taille_code_max, S);
+
+			i=j;
+			affecter_mot(&mot, chercher_mot_dico(i, dico));
 		}
 	}
+
+	if (mot.suivant != NULL)
+		liberer_mot(mot.suivant);
+	if (mot2.suivant != NULL)
+		liberer_mot(mot2.suivant);
+
+	liberer_dico(dico);
 }
 
 void ecrire_lettre(FILE* S, type_mot* mot){

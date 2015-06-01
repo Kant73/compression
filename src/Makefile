@@ -3,19 +3,16 @@
 #NAVARRO Elsa
 #POPEK Florian
 
-FLAG = -DDEBUG -w -lm
+FLAG = -w -lm
 
 all: prog
 
-prog: main.o fonctions.o compression.o decompression.o dictionnaire.o
+prog: main.o compression.o decompression.o dictionnaire.o
 	gcc main.o dictionnaire.o compression.o decompression.o -o main -lm
 	
 main.o: Main.c ../include/*.h
 	gcc -c Main.c -o main.o -I ../include $(FLAG) 
 	
-fonctions.o: Fonctions.c ../include/*.h
-	gcc -c Fonctions.c -o fonctions.o -I ../include $(FLAG)
-
 compression.o: compression.c ../include/*.h
 	gcc -c compression.c -o compression.o -I ../include $(FLAG)
 
