@@ -8,7 +8,7 @@ FLAG = -w -lm
 all: prog
 
 prog: main.o compression.o decompression.o dictionnaire.o
-	gcc main.o dictionnaire.o compression.o decompression.o -o main -lm
+	gcc main.o dictionnaire.o compression.o decompression.o -o LZW -lm
 	
 main.o: Main.c ../include/*.h
 	gcc -c Main.c -o main.o -I ../include $(FLAG) 

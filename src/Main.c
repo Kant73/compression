@@ -15,6 +15,14 @@ int main(int argc, char* argv[])
 		printf("<DEBUG MODE ENABLED>\n");
 	#endif
 	
+	if (argc != 5)
+	{
+		printf("\nPour compresser:\t./LZW -c <fichier_a_compresser> <fichier_compressé>\n");
+		printf("Pour décompresser:\t./LZW -d <fichier_a_décompresser> <fichier_décompressé>\n\n");
+
+		return;
+	}
+
 	FILE* fileE;
 	FILE* fileS;
 	fileE = fopen(argv[2], "r");
@@ -22,7 +30,7 @@ int main(int argc, char* argv[])
 
 	if (fileE == NULL)
 	{
-		printf("Impossible d'ouvrir le fichier...\n");
+		printf("\nImpossible d'ouvrir le fichier...\n");
 		return 1;
 	}
 	
@@ -30,7 +38,14 @@ int main(int argc, char* argv[])
 		encode(fileE, fileS);
 	else if (!strcmp(argv[1], "-d"))
 		decode(fileE, fileS);
-	
+	else
+	{
+		printf("\nPour compresser:\t./LZW -c <fichier_a_compresser> <fichier_compressé>\n");
+		printf("Pour décompresser:\t./LZW -d <fichier_a_décompresser> <fichier_décompressé>\n\n");
+
+		return;
+	}
+
 	fclose(fileE);
 	fclose(fileS);
 	
