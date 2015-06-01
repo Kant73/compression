@@ -7,10 +7,9 @@
 
 
 /**
- * [encode description]
- * @param
- * @param
- * @param
+ * Fonction permettant l'encodage d'un fichier grâce à l'algorithme LZW
+ * @param E	Le fichier qu'on veut encoder
+ * @param S 	Le fichier encodé de sortie
  */
 void encode(FILE* E, FILE* S);
 
