@@ -14,13 +14,8 @@ Notre utilitaire produit un fichier compressé à partir d'un fichier original q
 
 #Choix de conception
 ##Structures de données
-###Dictionnaire:
-
-###Mot:
-
-
-##Fonctions
-
+###Structure du dictionnaire
+![Structure du dictionnaire](img/dico_struct.jpg "Structure du dictionnaire")
 
 
 #Choix de programmation et organisation logicielle
@@ -55,7 +50,7 @@ gcc main.o dictionnaire.o compression.o decompression.o -o LZW -w -lm -O3
 Si il est nécessaire de nettoyer le dossier `/src`, deux commandes sont prévues à cet effet :
 `make clean` et `make mrproper`.
 
-La première commande s'occupe uniquement de supprimer les fichiers `.o` alors que la deuxième supprime les fichiers `.` ainsi que les exécutables ayant pu être générés dans le dossier `src\`.
+La première commande s'occupe uniquement de supprimer les fichiers `.o` alors que la deuxième supprime les fichiers `.o` ainsi que les exécutables ayant pu être générés dans le dossier `src\`.
 
 ##Utilisation
 Afin d'utiliser le programme, il suffit d’exécuter la commande suivante :
@@ -91,6 +86,8 @@ Notre utilitaire est compilé en utilisant le flag -O3 afin d'optimiser le mieux
 
 ##Ré-initialisation partielle ou totale du dictionnaire
 Notre dictionnaire est réinitialiser quand sa taille atteint 2<sup>19</sup> élements. En effet, nous avons choisi cette taille car après avoir fais de nombreuses analyses, nous avons déterminé que le niveau de compression stagnais avec des dictionnaire plus importants, comme vous pouvez le voir avec le graphique ci-dessous.
+
+![Evolution du taux de compression par rapport à la taille du dictionnaire](img/graphique.png "Evolution du taux de compression par rapport à la taille du dictionnaire")
 
 #Documentation
 Le code source de ce projet est entièrement commenté. Néanmoins, une documentation Doxygen a tout de même été générée afin d'obtenir une documentation plus propre et permettant de trouver plus facilement les différentes définitions des fonctions que nous avons implémentées.

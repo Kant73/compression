@@ -1,11 +1,12 @@
-/*
-	Projet CPS - Compression LZW
-	Adrien DELAPORTE - Quentin DUNAND - Elsa NAVARRO - Florian POPEK
-	decompression.h
+/**
+ *	Projet CPS - Compression LZW
+ *	@author Adrien DELAPORTE - Quentin DUNAND - Elsa NAVARRO - Florian POPEK
+ *	@file decompression.h
+ *	@date 2015
  */
 
 /**
- * Algorithme de décodage du fichier d'entrée dans le fichier de sortie
+ * @brief Algorithme de décodage du fichier d'entrée dans le fichier de sortie
  * @param E fichier d'entree
  * @param S fichier de sortie compresse
  * @param dictionnaire dico

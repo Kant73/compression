@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Projet PLS: Référence du fichier /home/quentin/Documents/polytech/cps/compression/include/dictionnaire.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Projet PLS
+   </div>
+   <div id="projectbrief">Compression &amp; Décompression LZW</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="pages.html"><span>Pages&#160;associées</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('dictionnaire_8h.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier dictionnaire.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Projet CPS - Compression LZW.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+</div>
+<p><a href="dictionnaire_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__dico.html">type_dico</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__code.html">type_code</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__mot.html">type_mot</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__cellule.html">type_cellule</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a0630f25947669ded90bdb61e046910da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0630f25947669ded90bdb61e046910da"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>_TAILLE_</b>&#160;&#160;&#160;32768</td></tr>
+<tr class="separator:a0630f25947669ded90bdb61e046910da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a8d56d161290010d9f9bd4ba111afea02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d56d161290010d9f9bd4ba111afea02"></a>
+typedef struct <a class="el" href="structtype__dico.html">type_dico</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_dico</b></td></tr>
+<tr class="separator:a8d56d161290010d9f9bd4ba111afea02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad02ab1e8e355473af9e19c69c4444e0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad02ab1e8e355473af9e19c69c4444e0c"></a>
+typedef struct <a class="el" href="structtype__code.html">type_code</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_code</b></td></tr>
+<tr class="separator:ad02ab1e8e355473af9e19c69c4444e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe649fdc63b29dfd5e49dc91b03723f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe649fdc63b29dfd5e49dc91b03723f5"></a>
+typedef struct <a class="el" href="structtype__mot.html">type_mot</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_mot</b></td></tr>
+<tr class="separator:abe649fdc63b29dfd5e49dc91b03723f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567b3296bc874c5b0fe5de77e7de8951"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a567b3296bc874c5b0fe5de77e7de8951"></a>
+typedef struct <a class="el" href="structtype__cellule.html">type_cellule</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_cellule</b></td></tr>
+<tr class="separator:a567b3296bc874c5b0fe5de77e7de8951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:adcccac88754f9e3a1308220902cf53d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcccac88754f9e3a1308220902cf53d3"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>type_enum</b> { <b>COMP</b> = 0, 
+<b>DECOMP</b>
+ }</td></tr>
+<tr class="separator:adcccac88754f9e3a1308220902cf53d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ad244a741e00dd62328f7400171ac36f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#ad244a741e00dd62328f7400171ac36f4">initialiser_dico</a> (<a class="el" href="structtype__dico.html">type_dico</a> *dico, enum type_enum m)</td></tr>
+<tr class="memdesc:ad244a741e00dd62328f7400171ac36f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le dictionnaire, m pour compression ou décompression.  <a href="#ad244a741e00dd62328f7400171ac36f4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad244a741e00dd62328f7400171ac36f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8849b1e6c290503cbb83ee79f97ee704"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a8849b1e6c290503cbb83ee79f97ee704">vider_dico</a> (<a class="el" href="structtype__dico.html">type_dico</a> *dico, int *taille_code)</td></tr>
+<tr class="memdesc:a8849b1e6c290503cbb83ee79f97ee704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vide le dictionnaire.  <a href="#a8849b1e6c290503cbb83ee79f97ee704">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8849b1e6c290503cbb83ee79f97ee704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93ee7fba15c1c0f4b0cf7120bc466496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a93ee7fba15c1c0f4b0cf7120bc466496">inserer_dico</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot, <a class="el" href="structtype__dico.html">type_dico</a> *dico, int *taille_code, FILE *S)</td></tr>
+<tr class="memdesc:a93ee7fba15c1c0f4b0cf7120bc466496"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insère un mot dans le dictionnaire.  <a href="#a93ee7fba15c1c0f4b0cf7120bc466496">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a93ee7fba15c1c0f4b0cf7120bc466496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe77d4665acbed49306297b8351ec08"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbe77d4665acbed49306297b8351ec08"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#acbe77d4665acbed49306297b8351ec08">ajouter_element</a> (uint8_t i, <a class="el" href="structtype__dico.html">type_dico</a> *d)</td></tr>
+<tr class="memdesc:acbe77d4665acbed49306297b8351ec08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un élément dans le tableau des codes (exclusif décompression) <br /></td></tr>
+<tr class="separator:acbe77d4665acbed49306297b8351ec08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512a8b8a3513f8dabd217e5b7bbf6304"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a512a8b8a3513f8dabd217e5b7bbf6304">chercher_code_dico</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot, <a class="el" href="structtype__dico.html">type_dico</a> *dico)</td></tr>
+<tr class="memdesc:a512a8b8a3513f8dabd217e5b7bbf6304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recherche le code associé à un mot.  <a href="#a512a8b8a3513f8dabd217e5b7bbf6304">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a512a8b8a3513f8dabd217e5b7bbf6304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8dbb5ee13678b10ac3f411e491aeea1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#ab8dbb5ee13678b10ac3f411e491aeea1">chercher_mot_dico</a> (int code, <a class="el" href="structtype__dico.html">type_dico</a> *dico)</td></tr>
+<tr class="memdesc:ab8dbb5ee13678b10ac3f411e491aeea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recherche le mot associé à un code.  <a href="#ab8dbb5ee13678b10ac3f411e491aeea1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab8dbb5ee13678b10ac3f411e491aeea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7216ac29779b4da6dae6b518ec47d7bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a7216ac29779b4da6dae6b518ec47d7bb">afficher_dico</a> (<a class="el" href="structtype__dico.html">type_dico</a> *dico)</td></tr>
+<tr class="memdesc:a7216ac29779b4da6dae6b518ec47d7bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le dictionnaire (récursif)  <a href="#a7216ac29779b4da6dae6b518ec47d7bb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7216ac29779b4da6dae6b518ec47d7bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5189c8f3d3ae6aa9e5faaaf45a13a66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5189c8f3d3ae6aa9e5faaaf45a13a66"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#ad5189c8f3d3ae6aa9e5faaaf45a13a66">afficher_tableau</a> ()</td></tr>
+<tr class="memdesc:ad5189c8f3d3ae6aa9e5faaaf45a13a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le tableau. <br /></td></tr>
+<tr class="separator:ad5189c8f3d3ae6aa9e5faaaf45a13a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab804bccbcf8e24e616b5f96e793df516"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#ab804bccbcf8e24e616b5f96e793df516">liberer_mot</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot)</td></tr>
+<tr class="memdesc:ab804bccbcf8e24e616b5f96e793df516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de libérer un mot de la mémoire.  <a href="#ab804bccbcf8e24e616b5f96e793df516">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab804bccbcf8e24e616b5f96e793df516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a337b1b7fa6dda04cfac4d1e061667443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a337b1b7fa6dda04cfac4d1e061667443">liberer_dico</a> (<a class="el" href="structtype__dico.html">type_dico</a> *dico)</td></tr>
+<tr class="memdesc:a337b1b7fa6dda04cfac4d1e061667443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de libérer un dictionnaire (récursif)  <a href="#a337b1b7fa6dda04cfac4d1e061667443">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a337b1b7fa6dda04cfac4d1e061667443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00bcde128b7f5ee14f107da63599b23c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00bcde128b7f5ee14f107da63599b23c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a00bcde128b7f5ee14f107da63599b23c">liberer_tableau</a> ()</td></tr>
+<tr class="memdesc:a00bcde128b7f5ee14f107da63599b23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libérer le tableau (exclusif à la décompression) <br /></td></tr>
+<tr class="separator:a00bcde128b7f5ee14f107da63599b23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73e99208284b48dea6315961d4fa194b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a73e99208284b48dea6315961d4fa194b">paquet8_ecrire</a> (int code, int taille, FILE *S)</td></tr>
+<tr class="memdesc:a73e99208284b48dea6315961d4fa194b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ecrit dans le fichier les octets, mémorise les bits restants.  <a href="#a73e99208284b48dea6315961d4fa194b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a73e99208284b48dea6315961d4fa194b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af53295bbc1cb36beefce0d5ed7eb3f5e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#af53295bbc1cb36beefce0d5ed7eb3f5e">paquet8_lire</a> (int taille, FILE *S)</td></tr>
+<tr class="memdesc:af53295bbc1cb36beefce0d5ed7eb3f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lit dans le fichier les octets, mémorise les bits restants.  <a href="#af53295bbc1cb36beefce0d5ed7eb3f5e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af53295bbc1cb36beefce0d5ed7eb3f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb377b42fa6710f32c1dc8675654b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#aabb377b42fa6710f32c1dc8675654b5e">mot_associe</a> (<a class="el" href="structtype__dico.html">type_dico</a> *dico, uint8_t indice)</td></tr>
+<tr class="memdesc:aabb377b42fa6710f32c1dc8675654b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remonte le dictionnaire pour chercher le mot associé  <a href="#aabb377b42fa6710f32c1dc8675654b5e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aabb377b42fa6710f32c1dc8675654b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5213ae2046b6f810f6f1ab95559afa7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#ad5213ae2046b6f810f6f1ab95559afa7">inserer_queue_mot</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot, uint8_t elem)</td></tr>
+<tr class="memdesc:ad5213ae2046b6f810f6f1ab95559afa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatène un élément à un mot.  <a href="#ad5213ae2046b6f810f6f1ab95559afa7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad5213ae2046b6f810f6f1ab95559afa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe71d8e7ead31101d738c84562879cda"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#afe71d8e7ead31101d738c84562879cda">to_binaire</a> (unsigned long int arg)</td></tr>
+<tr class="memdesc:afe71d8e7ead31101d738c84562879cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de printf en binaire (s)  <a href="#afe71d8e7ead31101d738c84562879cda">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afe71d8e7ead31101d738c84562879cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a176ea2806aa173df2dcd1befeead52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a1a176ea2806aa173df2dcd1befeead52">affecter_mot</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot1, <a class="el" href="structtype__mot.html">type_mot</a> *mot2)</td></tr>
+<tr class="memdesc:a1a176ea2806aa173df2dcd1befeead52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'affecter au mot1 les valeurs du mot2.  <a href="#a1a176ea2806aa173df2dcd1befeead52">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1a176ea2806aa173df2dcd1befeead52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89dde2d374345e177ce65615ef4a3178"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dictionnaire_8h.html#a89dde2d374345e177ce65615ef4a3178">afficher_mot</a> (<a class="el" href="structtype__mot.html">type_mot</a> *mot)</td></tr>
+<tr class="memdesc:a89dde2d374345e177ce65615ef4a3178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'affiche un mot.  <a href="#a89dde2d374345e177ce65615ef4a3178">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a89dde2d374345e177ce65615ef4a3178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a619ef1bf7c175b8439692441f548b5cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a619ef1bf7c175b8439692441f548b5cc"></a>
+<a class="el" href="structtype__cellule.html">type_cellule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tableau</b> [16]</td></tr>
+<tr class="separator:a619ef1bf7c175b8439692441f548b5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eff73997e4938d0010784dac88b0a53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eff73997e4938d0010784dac88b0a53"></a>
+enum type_enum&#160;</td><td class="memItemRight" valign="bottom"><b>mode</b></td></tr>
+<tr class="separator:a8eff73997e4938d0010784dac88b0a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cf781c811971f235168779e567b632"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8cf781c811971f235168779e567b632"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cpt</b></td></tr>
+<tr class="separator:aa8cf781c811971f235168779e567b632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Projet CPS - Compression LZW. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Adrien DELAPORTE - Quentin DUNAND - Elsa NAVARRO - Florian POPEK</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2015 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a1a176ea2806aa173df2dcd1befeead52"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void affecter_mot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'affecter au mot1 les valeurs du mot2. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot1</td><td>Le mot dont on veut changer les valeurs </td></tr>
+    <tr><td class="paramname">mot2</td><td>Le mot dont on copie les valeurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7216ac29779b4da6dae6b518ec47d7bb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le dictionnaire (récursif) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dico</td><td>Le dico qu'on veut afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a89dde2d374345e177ce65615ef4a3178"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_mot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'affiche un mot. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot</td><td>Le mot qu'on veut afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a512a8b8a3513f8dabd217e5b7bbf6304"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int chercher_code_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recherche le code associé à un mot. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot</td><td>Le mot qu'on cherche dans le dico </td></tr>
+    <tr><td class="paramname">dico</td><td>Le dico dans lequel on cherche des éléments </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le code du mot recherché, -1 si il n'est pas trouvé </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab8dbb5ee13678b10ac3f411e491aeea1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structtype__mot.html">type_mot</a>* chercher_mot_dico </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recherche le mot associé à un code. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Le code dont on veut le mot associé </td></tr>
+    <tr><td class="paramname">dico</td><td>Le dico danq lequel on cherche le mot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le mot associé au code </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad244a741e00dd62328f7400171ac36f4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initialiser_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum type_enum&#160;</td>
+          <td class="paramname"><em>m</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise le dictionnaire, m pour compression ou décompression. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dico</td><td>Le dictionnaire qu'on veut initialiser </td></tr>
+    <tr><td class="paramname">m</td><td>Le mode d'initialisation : compression ou décompression </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a93ee7fba15c1c0f4b0cf7120bc466496"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inserer_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>taille_code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>S</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insère un mot dans le dictionnaire. </p>
+<p>Génère le code associé et change la taille du code si nécessaire (ex: cpt = 511, taille_code = 9 -&gt; taille_code = 10) </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot</td><td>Le mot qu'on veut inserer dans le dico </td></tr>
+    <tr><td class="paramname">dico</td><td>Le dico dans lequel on veut inserer un mot </td></tr>
+    <tr><td class="paramname">taille_code</td><td>La taille du code </td></tr>
+    <tr><td class="paramname">S</td><td>Le fichier de sortie pour la compression ou la décompression </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad5213ae2046b6f810f6f1ab95559afa7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inserer_queue_mot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>elem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatène un élément à un mot. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot</td><td>Le mot au quel on veut concatener un élément </td></tr>
+    <tr><td class="paramname">elem</td><td>L'élément qu'on veut concatener au mot </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a337b1b7fa6dda04cfac4d1e061667443"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void liberer_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de libérer un dictionnaire (récursif) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dico</td><td>Le dico qu'on veut libérer de la mémoire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab804bccbcf8e24e616b5f96e793df516"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void liberer_mot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__mot.html">type_mot</a> *&#160;</td>
+          <td class="paramname"><em>mot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de libérer un mot de la mémoire. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mot</td><td>Le mot que l'ont veut libérer de la mémoire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aabb377b42fa6710f32c1dc8675654b5e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structtype__mot.html">type_mot</a>* mot_associe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>indice</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remonte le dictionnaire pour chercher le mot associé </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dico</td><td>Le dictionnaire qu'on remonte </td></tr>
+    <tr><td class="paramname">indice</td><td>L'indice du mot qu'on cherche </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le mot associé à l'indice </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a73e99208284b48dea6315961d4fa194b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paquet8_ecrire </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>S</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ecrit dans le fichier les octets, mémorise les bits restants. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Le code qu'on veut écrire dans le fichier </td></tr>
+    <tr><td class="paramname">taille</td><td>La taille du code </td></tr>
+    <tr><td class="paramname">S</td><td>Le fichier dans lequel on veut écrire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af53295bbc1cb36beefce0d5ed7eb3f5e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int paquet8_lire </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>S</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lit dans le fichier les octets, mémorise les bits restants. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">taille</td><td>La taille qu'on veut lire </td></tr>
+    <tr><td class="paramname">S</td><td>Le fichier dans lequel on lit </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Les octets qu'on veut ecrire </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afe71d8e7ead31101d738c84562879cda"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* to_binaire </td>
+          <td>(</td>
+          <td class="paramtype">unsigned long int&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de printf en binaire (s) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>La variable qu'on veut printf en binaire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Une chaine qui contient l'écriture binaire de notre variable </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8849b1e6c290503cbb83ee79f97ee704"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vider_dico </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtype__dico.html">type_dico</a> *&#160;</td>
+          <td class="paramname"><em>dico</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>taille_code</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vide le dictionnaire. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dico</td><td>Le dico que l'on veut vider </td></tr>
+    <tr><td class="paramname">taille_code</td><td>La taille du code </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dictionnaire_8h.html">dictionnaire.h</a></li>
+    <li class="footer">Généré le Lundi 1 Juin 2015 21:57:03 pour Projet PLS par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>
