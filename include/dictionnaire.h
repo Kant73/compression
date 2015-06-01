@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define _TAILLE_ 1048576
+#define _TAILLE_ 32768
 
 typedef struct type_dico type_dico;
 typedef struct type_code type_code;
